@@ -41,15 +41,26 @@ To build the debug APK using Gradle:
 ```
 The APK will be generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
-### 3. Creating Releases with Automated APK Builds
-This repository includes a GitHub Actions workflow (`.github/workflows/build-release.yml`) that automatically compiles and attaches a build artifact whenever a release tag is pushed.
+### 3. Downloading the APK from GitHub
 
-To tag and trigger a new release build:
+The repository includes an automated GitHub Actions workflow (`.github/workflows/build-release.yml`) that builds the APK automatically.
+
+#### Option A: Download directly from GitHub Actions (No tag needed)
+1. Go to your GitHub repository in your browser.
+2. Click on the **Actions** tab at the top.
+3. In the left sidebar, select **Build and Download APK** (or click the latest workflow run on the list).
+   *(You can also click **Run workflow** -> **Run workflow** to trigger a build manually at any time!)*
+4. Click on the completed workflow run.
+5. Scroll down to the **Artifacts** section at the bottom of the summary page.
+6. Click **PersonalityReflectionHub-APK** to download the ZIP file containing `app-debug.apk` directly to your computer or phone.
+
+#### Option B: Download from GitHub Releases (Tagged Releases)
+Whenever a version tag (`v*`) is pushed:
 ```bash
 git tag v1.0.0
 git push origin v1.0.0
 ```
-Each tagged release (`v*`) will automatically build and publish the APK to the GitHub Releases page.
+GitHub Actions will automatically compile the APK and attach `app-debug.apk` directly to the GitHub **Releases** page (`https://github.com/<your-username>/<repo>/releases`), where anyone can download it with a single click.
 
 ### Versioning Rules
 For every future release, adhere to standard Semantic Versioning:
