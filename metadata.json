@@ -1,0 +1,6 @@
+{
+  "name": "Personality Reflection Hub",
+  "description": "A clinically-informed, stigma-sensitive mental health reflection and psychoeducation app based on the WHO ICD-11 model, commissioned by Dr. Raghav Suthar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
