@@ -46,10 +46,14 @@ fun ReflectScreen(
     var safetyAnswer by remember { mutableIntStateOf(0) } // 0..2
 
     val domains = TraitDomain.entries
-    val currentDomain = domains[currentDomainIndex]
-    val currentQuestions = AssessmentData.questions.filter { it.domain == currentDomain }
+    val currentDomain = domains.getOrNull(currentDomainIndex)
+    val currentQuestions = currentDomain?.let { d -> AssessmentData.questions.filter { it.domain == d } } ?: emptyList()
 
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(currentDomainIndex, hasStarted, isCompleted) {
+        scrollState.scrollTo(0)
+    }
 
     Column(
         modifier = modifier
@@ -70,36 +74,36 @@ fun ReflectScreen(
             )
         } else if (!isCompleted) {
             // Screen 2: Questionnaire Domain Steps
-            DomainQuestionnaireStep(
-                domain = currentDomain,
-                stepNumber = currentDomainIndex + 1,
-                totalSteps = domains.size + 1, // 6 domains + safety check
-                questions = currentQuestions,
-                answers = answers,
-                onAnswerSelected = { qId, score -> answers[qId] = score },
-                selectedImpact = domainImpacts[currentDomain] ?: 0,
-                onImpactSelected = { domainImpacts[currentDomain] = it },
-                language = language,
-                canProceed = currentQuestions.all { answers.containsKey(it.id) },
-                onNext = {
-                    if (currentDomainIndex < domains.size - 1) {
-                        currentDomainIndex++
-                    } else {
-                        // Move to safety check
-                        currentDomainIndex = domains.size
+            if (currentDomain != null) {
+                DomainQuestionnaireStep(
+                    domain = currentDomain,
+                    stepNumber = currentDomainIndex + 1,
+                    totalSteps = domains.size + 1, // 6 domains + safety check
+                    questions = currentQuestions,
+                    answers = answers,
+                    onAnswerSelected = { qId, score -> answers[qId] = score },
+                    selectedImpact = domainImpacts[currentDomain] ?: 0,
+                    onImpactSelected = { domainImpacts[currentDomain] = it },
+                    language = language,
+                    canProceed = currentQuestions.all { answers.containsKey(it.id) },
+                    onNext = {
+                        if (currentDomainIndex < domains.size - 1) {
+                            currentDomainIndex++
+                        } else {
+                            // Move to safety check
+                            currentDomainIndex = domains.size
+                        }
+                    },
+                    onBack = {
+                        if (currentDomainIndex > 0) {
+                            currentDomainIndex--
+                        } else {
+                            hasStarted = false
+                        }
                     }
-                },
-                onBack = {
-                    if (currentDomainIndex > 0) {
-                        currentDomainIndex--
-                    } else {
-                        hasStarted = false
-                    }
-                }
-            )
-
-            // Step 7: Safety Check Step
-            if (currentDomainIndex == domains.size) {
+                )
+            } else if (currentDomainIndex == domains.size) {
+                // Step 7: Safety Check Step
                 SafetyCheckStep(
                     language = language,
                     safetyAnswer = safetyAnswer,
@@ -853,7 +857,107 @@ private fun AssessmentResultsView(
             }
         }
 
-        // Clinical assessment disclaimer & what a real assessment entails
+        // 4. NEW: Why This Reflection Matters (purpose)
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(18.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = AssessmentData.purposeStatementTitle.get(language),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Text(
+                    text = AssessmentData.purposeStatementBody.get(language),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    lineHeight = 22.sp
+                )
+            }
+        }
+
+        // 5. NEW: Your Next Steps (personalized based on actual results)
+        val elevatedDomains = domainResults.filter { it.tier == ResultTier.MORE_THAN_MOST }
+        val highestImpact = domainResults.maxOfOrNull { it.impactLevel } ?: 0
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(18.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = AssessmentData.nextStepsTitle.get(language),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                // Step A: Domain callout (only if at least one domain is MORE_THAN_MOST)
+                if (elevatedDomains.isNotEmpty()) {
+                    val domainNames = elevatedDomains.joinToString(", ") { it.domain.everydayName.get(language) }
+                    Surface(
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Text(
+                            text = AssessmentData.getDomainCalloutText(domainNames, language),
+                            modifier = Modifier.padding(12.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            lineHeight = 20.sp
+                        )
+                    }
+                }
+
+                // Step B: Tiered guidance based on highest impact level reported
+                val tieredGuidance = AssessmentData.nextStepsTieredGuidance.getOrElse(highestImpact.coerceIn(0, 3)) {
+                    AssessmentData.nextStepsTieredGuidance[0]
+                }.get(language)
+
+                Text(
+                    text = tieredGuidance,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    lineHeight = 22.sp
+                )
+            }
+        }
+
+        // 6. Clinical assessment disclaimer & what a real evaluation entails
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
@@ -873,26 +977,41 @@ private fun AssessmentResultsView(
                         tint = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "This is a reflection tool, NOT a diagnosis.",
+                        text = when (language) {
+                            Language.ENGLISH -> "This is a reflection tool, NOT a diagnosis."
+                            Language.HINDI -> "यह एक चिंतन उपकरण है, कोई चिकित्सीय निदान नहीं।"
+                            Language.GUJARATI -> "આ એક ચિંતન સાધન છે, કોઈ તબીબી નિદાન નથી."
+                        },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                 }
 
                 Text(
-                    text = "A real psychiatric evaluation under ICD-11 involves:\n" +
-                            "• A comprehensive clinical interview conducted over time by a qualified mental health specialist\n" +
-                            "• Gathering developmental history from adolescence into adulthood\n" +
-                            "• Ruling out medical conditions, neurological factors, ADHD, or substance effects\n" +
-                            "• Evaluating impairment across social, occupational, and personal functioning.\n\n" +
-                            "If you feel these patterns cause persistent pain in your life, consider reaching out to a clinical psychologist or psychiatrist for personalized care.",
+                    text = when (language) {
+                        Language.ENGLISH -> "A real psychiatric evaluation under ICD-11 involves:\n" +
+                                "• A comprehensive clinical interview conducted over time by a qualified mental health specialist\n" +
+                                "• Gathering developmental history from adolescence into adulthood\n" +
+                                "• Ruling out medical conditions, neurological factors, ADHD, or substance effects\n" +
+                                "• Evaluating impairment across social, occupational, and personal functioning."
+                        Language.HINDI -> "ICD-11 के तहत वास्तविक मनोरोग मूल्यांकन में शामिल हैं:\n" +
+                                "• एक योग्य मानसिक स्वास्थ्य विशेषज्ञ द्वारा समय के साथ लिया गया विस्तृत नैदानिक साक्षात्कार\n" +
+                                "• किशोरावस्था से वयस्कता तक के विकासात्मक इतिहास की जानकारी\n" +
+                                "• शारीरिक बीमारियों, न्यूरोलॉजिकल कारणों, ADHD या नशीले पदार्थों के प्रभावों को अलग करना\n" +
+                                "• सामाजिक, व्यावसायिक और व्यक्तिगत जीवन में आने वाली कठिनाइयों का मूल्यांकन।"
+                        Language.GUJARATI -> "ICD-11 હેઠળ વાસ્તવિક માનસિક મૂલ્યાંકનમાં સામેલ છે:\n" +
+                                "• લાયક માનસિક સ્વાસ્થ્ય નિષ્ણાત દ્વારા વિસ્તૃત તબીબી મુલાકાત\n" +
+                                "• કિશોરાવસ્થાથી પુખ્તાવસ્થા સુધીના વિકાસલક્ષી ઇતિહાસની માહિતી\n" +
+                                "• શારીરિક બીમારીઓ, ન્યુરોલોજીકલ પરિબળો, ADHD કે નશાની અસરોને અલગ તારવવી\n" +
+                                "• સામાજિક, વ્યાવસાયિક અને વ્યક્તિગત જીવનમાં થતા પ્રભાવનું મૂલ્યાંકન."
+                    },
                     style = MaterialTheme.typography.bodySmall,
                     lineHeight = 18.sp
                 )
             }
         }
 
-        // Reset Assessment Button
+        // 7. Reset Assessment Button
         Button(
             onClick = onReset,
             modifier = Modifier
@@ -903,7 +1022,13 @@ private fun AssessmentResultsView(
         ) {
             Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Reset & Take Again")
+            Text(
+                text = when (language) {
+                    Language.ENGLISH -> "Reset & Take Again"
+                    Language.HINDI -> "रीसेट करें और दोबारा शुरू करें"
+                    Language.GUJARATI -> "રીસેટ કરો અને ફરીથી શરૂ કરો"
+                }
+            )
         }
     }
 }

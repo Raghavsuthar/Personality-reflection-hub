@@ -433,4 +433,59 @@ object AssessmentData {
         LocalizedString("Occasionally had fleeting thoughts", "कभी-कभार ऐसे विचार आए", "ક્યારેક આવા વિચારો આવ્યા હતા"),
         LocalizedString("Yes, actively experiencing these thoughts", "हाँ, वर्तमान में ऐसे विचार आ रहे हैं", "હા, હાલમાં આવા વિચારો આવી રહ્યા છે")
     )
+
+    // Purpose Statement
+    val purposeStatementTitle = LocalizedString(
+        en = "Why This Reflection Matters",
+        hi = "यह आत्म-चिंतन क्यों महत्वपूर्ण है",
+        gu = "આ આત્મ-ચિંતન શા માટે મહત્વનું છે"
+    )
+
+    val purposeStatementBody = LocalizedString(
+        en = "Understanding your own patterns of thinking, feeling, and relating to others is one of the most useful tools for emotional wellbeing. This isn't about finding a label for yourself — it's about building self-awareness, so you can respond to life's challenges with more clarity, build healthier relationships, and recognize early when it's time to reach out for support. Whatever your results today, taking the time to reflect like this is itself a meaningful step.",
+        hi = "सोचने, महसूस करने और दूसरों से जुड़ने के अपने तरीकों को समझना भावनात्मक स्वास्थ्य के लिए सबसे उपयोगी कदमों में से एक है। इसका उद्देश्य खुद पर कोई लेबल लगाना नहीं है — बल्कि आत्म-जागरूकता बढ़ाना है, ताकि आप जीवन की चुनौतियों का अधिक स्पष्टता से सामना कर सकें, बेहतर रिश्ते बना सकें और यह समय रहते पहचान सकें कि कब किसी से मदद लेने की आवश्यकता है। आज आपका परिणाम जो भी रहा हो, इस तरह आत्म-चिंतन के लिए समय निकालना अपने आप में एक सार्थक और महत्वपूर्ण कदम है।",
+        gu = "વિચારવાની, લાગણી અનુભવવાની અને અન્યો સાથે જોડાવાની આપણી રીતભાતને સમજવી એ માનસિક સ્વાસ્થ્ય માટે સૌથી ઉપયોગી સાધનોમાંનું એક છે. આનો હેતુ પોતાની જાત પર કોઈ લેબલ લગાવવાનો નથી — પરંતુ આત્મ-જાગૃતિ કેળવવાનો છે, જેથી તમે જીવનના પડકારોનો વધુ સ્પષ્ટતાથી સામનો કરી શકો, વધુ સારા સંબંધો કેળવી શકો અને સમયસર ઓળખી શકો કે ક્યારે મદદ લેવાની જરૂર છે. આજે તમારું પરિણામ ગમે તે હોય, આ રીતે આત્મ-ચિંતન માટે સમય કાઢવો એ પોતે જ એક સાર્થક પગલું છે."
+    )
+
+    // Personalized Next Steps
+    val nextStepsTitle = LocalizedString(
+        en = "Your Next Steps",
+        hi = "आपके अगले कदम",
+        gu = "તમારા આગામી પગલાં"
+    )
+
+    val nextStepsTieredGuidance = listOf(
+        // Level 0 - Minimal impact
+        LocalizedString(
+            en = "Right now, these patterns don't seem to be creating real difficulty in your life — that's a good sign. Keep checking in with yourself now and then, maintain the relationships and routines that support you, and feel free to revisit this reflection anytime things feel different.",
+            hi = "फिलहाल, ये प्रवृत्तियाँ आपके जीवन में कोई वास्तविक कठिनाई पैदा करती नहीं दिख रहीं — यह एक अच्छा संकेत है। समय-समय पर स्वयं से जुड़ते रहें, उन रिश्तों और दिनचर्या को बनाए रखें जो आपको सहारा देते हैं, और जब भी कुछ अलग महसूस हो, बेझिझक इस चिंतन को दोबारा दोहराएँ।",
+            gu = "અત્યારે, આ વલણો તમારા જીવનમાં કોઈ વાસ્તવિક મુશ્કેલી ઊભી કરતા જણાતા નથી — આ એક સારો સંકેત છે. સમય-સમય પર તમારી જાત સાથે જોડાતા રહો, તમને ટેકો આપતા સંબંધો અને દૈનિક ક્રિયાઓ જાળવી રાખો, અને જ્યારે પણ પરિસ્થિતિ બદલાયેલી લાગે ત્યારે ફરીથી આ ચિંતન કરી શકો છો."
+        ),
+        // Level 1 - Mild friction
+        LocalizedString(
+            en = "You noticed some mild friction in specific situations. This is very common and doesn't mean anything is wrong with you. It can help to notice what tends to trigger it, talk it through with someone you trust, and look at the coping ideas in the Patterns section for the areas that stood out.",
+            hi = "आपने कुछ खास परिस्थितियों में हल्की अनबन या तनाव महसूस किया है। यह बहुत सामान्य है और इसका मतलब यह बिल्कुल नहीं है कि आपमें कोई कमी या खराबी है। यह समझने में मदद मिल सकती है कि कौन सी बातें इसे शुरू करती हैं, किसी भरोसेमंद व्यक्ति से इस पर बात करें, और जिन क्षेत्रों पर ध्यान गया है उनके लिए 'पैटर्न' अनुभाग में दिए गए सुझाव देखें।",
+            gu = "તમે અમુક ચોક્કસ પરિસ્થિતિઓમાં હળવું ઘર્ષણ કે તણાવ અનુભવ્યો છે. આ ખૂબ સામાન્ય છે અને તેનો અર્થ એવો બિલકુલ નથી કે તમારામાં કોઈ ખામી છે. કઈ બાબતોથી આ તણાવ શરૂ થાય છે તે સમજવું, કોઈ વિશ્વાસુ વ્યક્તિ સાથે વાત કરવી, અને જે ક્ષેત્રો સામે આવ્યા છે તેના માટે 'પેટર્ન' વિભાગમાં આપેલા ઉપાયો વાંચવા મદદરૂપ બની શકે છે."
+        ),
+        // Level 2 - Moderate strain
+        LocalizedString(
+            en = "You indicated these patterns are creating ongoing strain in more than one part of your life. That's worth taking seriously. Many people find real benefit from talking to a counselor or psychologist at this stage — even without any formal diagnosis. Consider booking a conversation with a mental health professional alongside using the self-help ideas here.",
+            hi = "आपने संकेत दिया है कि ये प्रवृत्तियाँ आपके जीवन के एक से अधिक क्षेत्रों में लगातार तनाव पैदा कर रही हैं। इसे गंभीरता से लेना जरूरी है। कई लोगों को इस स्तर पर किसी काउंसलर या मनोवैज्ञानिक से बात करने से वास्तविक लाभ मिलता है — भले ही कोई औपचारिक निदान न हो। यहाँ दिए गए आत्म-सहायता विचारों के साथ-साथ किसी मानसिक स्वास्थ्य विशेषज्ञ से बातचीत करने पर विचार करें।",
+            gu = "તમે દર્શાવ્યું છે કે આ વલણો તમારા જીવનના એક કરતાં વધુ ક્ષેત્રોમાં સતત તણાવ ઊભો કરી રહ્યા છે. તેને ગંભીરતાથી લેવું યોગ્ય છે. કોઈપણ ઔપચારિક નિદાન વિના પણ, આ તબક્કે કાઉન્સેલર અથવા મનોવૈજ્ઞાનિક સાથે વાત કરવાથી ઘણા લોકોને વાસ્તવિક ફાયદો થાય છે. અહીં આપેલા વિચારો સાથે કોઈ માનસિક સ્વાસ્થ્ય નિષ્ણાત સાથે વાતચીત કરવાનું વિચારો."
+        ),
+        // Level 3 - Significant ongoing distress
+        LocalizedString(
+            en = "You indicated significant, ongoing distress. Please know this is treatable, and reaching out for support is a sign of strength. We'd strongly encourage you to consult a psychiatrist or clinical psychologist soon for a proper evaluation — the Helplines section has resources to help you find one and get started.",
+            hi = "आपने गंभीर और लगातार मानसिक कष्ट का संकेत दिया है। कृपया जानें कि यह पूरी तरह से उपचार-योग्य है, और मदद के लिए हाथ बढ़ाना साहस और समझदारी की निशानी है। हम आपको उचित मूल्यांकन के लिए जल्द ही किसी मनोचिकित्सक (psychiatrist) या क्लिनिकल मनोवैज्ञानिक से परामर्श करने का दृढ़ता से सुझाव देते हैं — 'हेल्पलाइन' (Helplines) अनुभाग में ऐसे साधन उपलब्ध हैं जो शुरुआत करने में आपकी सहायता कर सकते हैं।",
+            gu = "તમે ગંભીર અને સતત માનસિક પીડા દર્શાવી છે. કૃપા કરીને જાણો કે આનો ઉપચાર શક્ય છે, અને સહાય મેળવવી એ નબળાઈ નહીં પણ હિંમતની નિશાની છે. યોગ્ય મૂલ્યાંકન માટે અમે તમને ટૂંક સમયમાં કોઈ મનોચિકિત્સક (psychiatrist) અથવા ક્લિનિકલ સાયકોલોજિસ્ટનો સંપર્ક કરવાની ભારપૂર્વક ભલામણ કરીએ છીએ — 'હેલ્પલાઇન' (Helplines) વિભાગમાં યોગ્ય મદદ મેળવવા માટેના સાધનો ઉપલબ્ધ છે."
+        )
+    )
+
+    fun getDomainCalloutText(domainNames: String, language: Language): String {
+        return when (language) {
+            Language.ENGLISH -> "Your reflection today highlighted stronger patterns in: $domainNames. You can read more about what helps with each of these in the Patterns section."
+            Language.HINDI -> "आज के आपके चिंतन में इन क्षेत्रों में अधिक प्रबल प्रवृत्तियाँ सामने आई हैं: $domainNames। आप 'पैटर्न' (Patterns) अनुभाग में जाकर पढ़ सकते हैं कि इनमें से प्रत्येक में क्या चीज़ें मददगार साबित हो सकती हैं।"
+            Language.GUJARATI -> "આજના તમારા ચિંતનમાં આ ક્ષેત્રોમાં વધુ પ્રબળ વલણો જણાયા છે: $domainNames। તમે 'પેટર્ન' (Patterns) વિભાગમાં જઈને વાંચી શકો છો કે આ દરેક ક્ષેત્રમાં શું મદદરૂપ થઈ શકે છે."
+        }
+    }
 }

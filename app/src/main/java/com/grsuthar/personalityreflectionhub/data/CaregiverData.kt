@@ -59,7 +59,8 @@ object CaregiverData {
                     hi = "जीवन समाप्त करने की बातें, चीजें बाँटना, या खुद को चोट पहुँचाना।",
                     gu = "જીવન ટૂંકાવવાની વાતો, ચીજો વહેંચી દેવી કે જાતને નુકસાન પહોંચાડવું."
                 )
-            )
+            ),
+            illustrativeExample = PsychoeducationData.traitDomainDetails.first { it.domain == TraitDomain.NEGATIVE_AFFECTIVITY }.illustrativeExample
         ),
         CaregiverPatternGuide(
             domain = TraitDomain.DETACHMENT,
@@ -117,7 +118,8 @@ object CaregiverData {
                     hi = "खाना-पीना पूरी तरह छोड़ देना, सफाई की अनदेखी, या हफ्तों तक बिल्कुल बात न करना।",
                     gu = "ખાવા-પીવાનું સાવ છોડી દેવું, સ્વચ્છતાની ઉપેક્ષા કે અઠવાડિયાઓ સુધી સાવ સંપર્ક કાપી નાખવો."
                 )
-            )
+            ),
+            illustrativeExample = PsychoeducationData.traitDomainDetails.first { it.domain == TraitDomain.DETACHMENT }.illustrativeExample
         ),
         CaregiverPatternGuide(
             domain = TraitDomain.DISSOCIALITY,
@@ -175,7 +177,8 @@ object CaregiverData {
                     hi = "शारीरिक हमला, परिवार वालों को हिंसा की धमकी, या गैर-कानूनी गतिविधियाँ।",
                     gu = "શારીરિક હુમલો, પરિવારના સભ્યોને હિંસાની ધમકી કે ગેરકાયદેસર પ્રવૃત્તિઓ."
                 )
-            )
+            ),
+            illustrativeExample = PsychoeducationData.traitDomainDetails.first { it.domain == TraitDomain.DISSOCIALITY }.illustrativeExample
         ),
         CaregiverPatternGuide(
             domain = TraitDomain.DISINHIBITION,
@@ -233,7 +236,8 @@ object CaregiverData {
                     hi = "असहनीय कर्ज में डूबना, नशे की हालत में गाड़ी चलाना, या अत्यधिक नशा।",
                     gu = "દેવામાં ડૂબી જવું, નશાની હાલતમાં વાહન ચલાવવું કે ગંભીર નશો કરવો."
                 )
-            )
+            ),
+            illustrativeExample = PsychoeducationData.traitDomainDetails.first { it.domain == TraitDomain.DISINHIBITION }.illustrativeExample
         ),
         CaregiverPatternGuide(
             domain = TraitDomain.ANANKASTIA,
@@ -291,7 +295,8 @@ object CaregiverData {
                     hi = "काम के दबाव में नींद पूरी तरह उड़ जाना, या नियमों के चलते भोजन छोड़ना।",
                     gu = "કામના બોજ હેઠળ ઊંઘ સાવ ગાયબ થઈ જવી કે કડક નિયમોને લીધે ભૂખ્યા રહેવું."
                 )
-            )
+            ),
+            illustrativeExample = PsychoeducationData.traitDomainDetails.first { it.domain == TraitDomain.ANANKASTIA }.illustrativeExample
         ),
         CaregiverPatternGuide(
             domain = TraitDomain.BORDERLINE_PATTERN,
@@ -349,7 +354,8 @@ object CaregiverData {
                     hi = "आत्महत्या की सीधी बात, खुद को काटना, दवाएं जमा करना, या अलविदा संदेश भेजना।",
                     gu = "આત્મહત્યાનો સીધો ઉલ્લેખ, જાતને ઈજા પહોંચાડવી, દવાઓ ભેગી કરવી કે વિદાયના સંદેશા મોકલવા."
                 )
-            )
+            ),
+            illustrativeExample = PsychoeducationData.traitDomainDetails.first { it.domain == TraitDomain.BORDERLINE_PATTERN }.illustrativeExample
         )
     )
 

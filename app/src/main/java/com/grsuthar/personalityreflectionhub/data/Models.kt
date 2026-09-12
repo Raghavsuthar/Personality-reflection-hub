@@ -167,10 +167,25 @@ data class DomainResult(
     val impactLevel: Int // 0: minimal, 1: mild, 2: moderate, 3: severe
 )
 
+data class ConceptCardInfo(
+    val title: LocalizedString,
+    val subtitle: LocalizedString,
+    val description: LocalizedString,
+    val example: LocalizedString
+)
+
+data class SeverityLevelInfo(
+    val title: LocalizedString,
+    val summary: LocalizedString,
+    val description: LocalizedString,
+    val everydayImpactExample: LocalizedString
+)
+
 data class PatternEducationItem(
     val domain: TraitDomain,
     val everydayDescription: LocalizedString,
     val dayToDayLook: List<LocalizedString>,
+    val illustrativeExample: LocalizedString,
     val strengthsReframe: LocalizedString,
     val oldTermsBridge: LocalizedString
 )
@@ -181,7 +196,8 @@ data class CaregiverPatternGuide(
     val whatUnderneath: List<LocalizedString>,
     val whatHelps: List<LocalizedString>,
     val whatBackfires: List<LocalizedString>,
-    val whenToWorry: List<LocalizedString>
+    val whenToWorry: List<LocalizedString>,
+    val illustrativeExample: LocalizedString? = null
 )
 
 data class CrisisHelpline(

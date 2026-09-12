@@ -463,13 +463,47 @@ private fun CaregiverGuideAccordion(
                     // What you see
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(
-                            text = "What You Might See:",
+                            text = when (language) {
+                                Language.ENGLISH -> "What You Might See:"
+                                Language.HINDI -> "आप क्या देख सकते हैं:"
+                                Language.GUJARATI -> "તમે શું જોઈ શકો છો:"
+                            },
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold,
                             color = guide.domain.accentColor
                         )
                         guide.whatYouSee.forEach { text ->
                             Text("• ${text.get(language)}", style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+
+                    // What this can look like (Illustrative example)
+                    guide.illustrativeExample?.let { example ->
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                            border = BorderStroke(1.dp, guide.domain.accentColor.copy(alpha = 0.35f)),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(10.dp),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = when (language) {
+                                        Language.ENGLISH -> "What this can look like (Example):"
+                                        Language.HINDI -> "यह कैसा दिख सकता है (उदाहरण):"
+                                        Language.GUJARATI -> "આ કેવું દેખાઈ શકે (ઉદાહરણ):"
+                                    },
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = guide.domain.accentColor
+                                )
+                                Text(
+                                    text = example.get(language),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
                         }
                     }
 
