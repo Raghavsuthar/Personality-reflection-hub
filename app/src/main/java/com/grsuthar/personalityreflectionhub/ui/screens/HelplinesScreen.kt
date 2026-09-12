@@ -193,7 +193,10 @@ fun HelplinesScreen(
             }
         }
 
-        // Section 3: Evidence-Based Treatment Demystified
+        // Section 3: Finding a Professional (India Practical & Stigma-Sensitive Guide)
+        FindingProfessionalSection(language = language)
+
+        // Section 4: Evidence-Based Treatment Demystified
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

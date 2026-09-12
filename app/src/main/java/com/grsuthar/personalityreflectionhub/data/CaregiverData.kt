@@ -501,4 +501,213 @@ object CaregiverData {
             )
         )
     )
+
+    // --- Expressed Emotion: What the Evidence Shows Families ---
+    val expressedEmotionSection: List<EducationalSectionItem> = listOf(
+        EducationalSectionItem(
+            title = LocalizedString("What is 'Expressed Emotion' (EE)?", "अभिव्यक्त भावना (Expressed Emotion) क्या है?", "અભિવ્યક્ત લાગણી (Expressed Emotion) શું છે?"),
+            summary = LocalizedString(
+                "A recognized clinical measure of family emotional atmosphere: criticism, hostility, and over-involvement.",
+                "पारिवारिक माहौल का एक चिकित्सकीय पैमाना: लगातार आलोचना, कटुता और अत्यधिक भावनात्मक दखल।",
+                "પારિવારિક વાતાવરણનું એક તબીબી માપદંડ: સતત ટીકા, કડવાશ અને અતિશય ભાવનાત્મક દખલગીરી."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "High Expressed Emotion (High EE) consists of three patterns: (1) Critical remarks targeting the person's character, (2) Hostile rejection ('you ruin everything'), and (3) Emotional Over-Involvement (smothering, dramatic worry, hyper-policing their every move).",
+                    "उच्च अभिव्यक्त भावना (High EE) में तीन बातें शामिल होती हैं: (1) चरित्र पर चोट करने वाली आलोचना, (2) कड़वाहट ('तुम सब बर्बाद कर देते हो'), और (3) अत्यधिक दखलअंदाजी (हर पल नजर रखना, अति-चिंता दिखाना)।",
+                    "ઉચ્ચ અભિવ્યક્ત લાગણી (High EE) માં ત્રણ બાબતો સામેલ હોય છે: (1) ચારિત્ર્ય પર આક્ષેપ કરતી ટીકા, (2) કડવાશ ('તમે બધું બગાડી નાખો છો'), અને (3) અતિશય દખલગીરી (દરેક હિલચાલ પર નજર રાખવી, વધુ પડતી ચિંતા કરવી)."
+                ),
+                LocalizedString(
+                    "High EE is usually driven by love, desperation, and caregiver exhaustion — not malice. But to an already sensitive nervous system, it sounds like an unbearable sensory siren.",
+                    "यह व्यवहार अक्सर प्रेम, लाचारी और देखभालकर्ता की मानसिक थकावट से पैदा होता है। लेकिन संवेदनशील व्यक्ति के मस्तिष्क को यह असहनीय खतरे के सायरन जैसा लगता है।",
+                    "આ વર્તન મોટાભાગે પ્રેમ, લાચારી અને થાકમાંથી જન્મે છે. પરંતુ સંવેદનશીલ વ્યક્તિના મગજ માટે તે અસહ્ય ભયના એલાર્મ જેવું કામ કરે છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "High EE is not a moral failure of parents; it is a cycle of stress that families can learn to de-escalate.",
+                "यह परिवार की कोई विफलता नहीं है; यह तनाव का चक्र है जिसे परिवार मिलकर धीमा करना सीख सकते हैं।",
+                "આ પરિવારની કોઈ ખામી નથી; આ તણાવનું એક ચક્ર છે જેને કુટુંબ મળીને શાંત કરતા શીખી શકે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("What Decades of Clinical Research Prove", "दशकों के क्लिनिकल शोध क्या साबित करते हैं?", "દાયકાઓના તબીબી સંશોધનો શું સાબિત કરે છે?"),
+            summary = LocalizedString(
+                "Homes with Low Expressed Emotion have less than half the relapse and crisis rates of High EE homes.",
+                "शांत और कम तनाव वाले परिवारों में संकट और अस्पताल में भर्ती होने की दर आधे से भी कम पाई गई है।",
+                "શાંત અને સમજણભર્યા પરિવારોમાં કટોકટી અને હોસ્પિટલમાં દાખલ થવાનો દર અડધાથી પણ ઓછો નોંધાયો છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Psychiatric studies across multiple cultures consistently demonstrate that when families learn to reduce criticism and tone down emotional intensity, patient stability improves dramatically.",
+                    "दुनिया भर के चिकित्सा अध्ययनों से सिद्ध हुआ है कि जब परिवार आलोचना कम करना और बातचीत को शांत रखना सीखते हैं, तो व्यक्ति की मानसिक स्थिरता में भारी सुधार होता है।",
+                    "વિશ્વભરના તબીબી અભ્યાસો દર્શાવે છે કે જ્યારે કુટુંબ ટીકા ઘટાડે છે અને વાતચીતમાં શાંતિ જાળવે છે, ત્યારે વ્યક્તિની સ્થિરતામાં નોંધપાત્ર સુધારો થાય છે."
+                ),
+                LocalizedString(
+                    "Calm communication reduces biological cortisol spikes and amygdala over-activation, allowing the individual's logical brain to remain online and cooperative.",
+                    "शांत बातचीत तनाव के हार्मोन को कम करती है, जिससे व्यक्ति का मस्तिष्क संतुलित रहता है और वह सहयोग करने के लिए तैयार होता है।",
+                    "શાંત વાતચીત તણાવના હોર્મોન્સ ઘટાડે છે, જેથી વ્યક્તિનું મગજ સંતુલિત રહે છે અને સહકાર આપવા તૈયાર થાય છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Lowering the emotional temperature at home is often as potent as clinical intervention.",
+                "घर के भावनात्मक तापमान को कम रखना किसी पेशेवर उपचार जितना ही प्रभावशाली होता है।",
+                "ઘરના ભાવનાત્મક વાતાવરણને શાંત રાખવું એ વ્યાવસાયિક સારવાર જેટલું જ અસરકારક સાબિત થાય છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("The Low EE Alternative: Calm, Warmth & Space", "शांत विकल्प: अपनापन, आदर और निजी जगह", "શાંત વિકલ્પ: સ્નેહ, આદર અને અંગત જગ્યા"),
+            summary = LocalizedString(
+                "Replacing criticism and smothering with clear boundaries, emotional space, and validating warmth.",
+                "आलोचना और अति-दखल के बदले स्पष्ट सीमाएँ, सोचने का समय और समझदारी भरा अपनापन देना।",
+                "ટીકા અને અતિ-દખલગીરીને બદલે સ્પષ્ટ મર્યાદાઓ, વિચારવાનો સમય અને સમજણભર્યો સ્નેહ આપવો."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Warmth without smothering: Show caring through practical support and gentle statements ('I love you and I am here when you are ready') without demanding immediate emotional confession.",
+                    "बिना दबाव का अपनापन: व्यावहारिक सहारा दें और सहज शब्द कहें ('मैं तुमसे प्यार करता हूँ और जब तुम तैयार होगे मैं यहीं हूँ'), बिना तुरंत जवाब देने का दबाव बनाए।",
+                    "દબાણ વગરનો સ્નેહ: વ્યવહારુ ટેકો આપો અને સહજ શબ્દો કહો ('હું તને પ્રેમ કરું છું અને તું તૈયાર હોઈશ ત્યારે હું અહીં જ છું'), તાત્કાલિક ખુલાસાની અપેક્ષા રાખ્યા વગર."
+                ),
+                LocalizedString(
+                    "Respecting physical space: When someone is overwhelmed, stepping back into another room provides immediate nervous system relief.",
+                    "निजी जगह का सम्मान: जब कोई अत्यधिक उत्तेजित हो, तो दूसरे कमरे में चले जाना उसके तंत्रिका तंत्र को तुरंत शांत होने में मदद करता है।",
+                    "અંગત જગ્યાનું સન્માન: જ્યારે કોઈ ખૂબ ઉત્તેજિત હોય, ત્યારે થોડો સમય દૂર ખસી જવું તેની નર્વસ સિસ્ટમને તરત શાંત કરવામાં મદદ કરે છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Peaceful presence speaks louder than arguments or interrogation.",
+                "बहस या पूछताछ की तुलना में शांत मौजूदगी कहीं अधिक असरदार साबित होती है।",
+                "દલીલ કે પૂછપરછ કરતાં શાંત હાજરી ક્યાંય વધુ અસરકારક નીવડે છે."
+            )
+        )
+    )
+
+    // --- Evidence-Based Family Psychological Management ---
+    val familyManagementSteps: List<EducationalSectionItem> = listOf(
+        EducationalSectionItem(
+            title = LocalizedString("1. Family Psychoeducation", "1. पारिवारिक मानसिक शिक्षा", "1. પારિવારિક માનસિક શિક્ષણ"),
+            summary = LocalizedString(
+                "Understanding that intense reactions stem from emotional regulation vulnerabilities, not willful manipulation.",
+                "यह समझना कि तीखा व्यवहार भावनात्मक संवेदनशीलता से उपजा है, जानबूझकर की गई साज़िश नहीं।",
+                "એ સમજવું કે તીવ્ર વર્તન લાગણીશીલ સંવેદનશીલતામાંથી આવે છે, કોઈ જાણીજોઈને કરેલું નાટક નથી."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "When family members recognize that emotional storms are involuntary responses of an over-sensitive nervous system, anger naturally shifts to grounded empathy.",
+                    "जब परिवार समझता है कि तूफान एक संवेदनशील तंत्रिका तंत्र की लाचारी है, तो गुस्सा कम होकर शांत समझदारी में बदल जाता है।",
+                    "જ્યારે કુટુંબ સમજે છે કે આવેશ એ સંવેદનશીલ મગજની લાચારી છે, ત્યારે ક્રોધ આપોઆપ શાંત સહાનુભૂતિમાં ફેરવાઈ જાય છે."
+                ),
+                LocalizedString(
+                    "Both the individual and family read the same educational framework, establishing a shared neutral vocabulary free from blame.",
+                    "जब पूरा परिवार एक ही वैज्ञानिक जानकारी समझता है, तो आपसी बातचीत से आरोप-प्रत्यारोप मिट जाते हैं।",
+                    "જ્યારે સમગ્ર કુટુંબ એકસરખી વૈજ્ઞાનિક સમજણ મેળવે છે, ત્યારે પરસ્પર આક્ષેપો દૂર થઈ સામાન્ય ભાષા ઊભી થાય છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Knowledge removes taking emotional outbursts personally.",
+                "सही जानकारी होने से आप उनके गुस्से को अपने ऊपर व्यक्तिगत हमला मानना बंद कर देते हैं।",
+                "સાચી સમજણ તમને તેમના ગુસ્સાને અંગત આક્ષેપ તરીકે લેવાથી બચાવે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("2. Lowering the Emotional Temperature", "2. घर का भावनात्मक तापमान घटाना", "2. ઘરનું ભાવનાત્મક વાતાવરણ શાંત કરવું"),
+            summary = LocalizedString(
+                "Lowering speech volume, slowing speech rate, and taking intentional cooling pauses during conflict.",
+                "धीमी आवाज़, शांत गति, और बहस शुरू होते ही 20-30 मिनट का स्पष्ट विराम लेना।",
+                "ધીમો અવાજ, શાંત ગતિ અને બોલાચાલી શરૂ થતાં જ 20-30 મિનિટનો સ્પષ્ટ વિરામ લેવો."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Research shows that heart rates spike above 100 bpm during intense arguments, effectively disabling logical problem-solving. Neither party can think clearly at that moment.",
+                    "शोध बताते हैं कि तेज बहस के दौरान दिल की धड़कन 100 से ऊपर पहुंच जाती है, जिससे दिमाग का तार्किक हिस्सा काम करना बंद कर देता है।",
+                    "સંશોધનો દર્શાવે છે કે ઉગ્ર દલીલો વખતે ધબકારા વધી જાય છે, જેથી તાર્કિક વિચારસરણી અટકી પડે છે. તે સમયે કોઈ સમાધાન શક્ય નથી."
+                ),
+                LocalizedString(
+                    "Institute a family rule: anyone can call a 20-minute 'Cooling Pause' without penalty or pursuit, returning only when physiological calm is restored.",
+                    "परिवार में नियम बनाएं: कोई भी बिना किसी सज़ा के 20 मिनट का 'कूलिंग ब्रेक' ले सकता है और दोनों के शांत होने पर ही बात होगी।",
+                    "પરિવારમાં નિયમ બનાવો: કોઈ પણ વ્યક્તિ 20 મિનિટનો 'કૂલિંગ બ્રેક' લઈ શકે છે અને શાંત થયા પછી જ આગળ વાત થશે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Never try to solve a problem while the fire is actively burning; wait for the embers to cool.",
+                "जब आग भड़की हो तब समस्या सुलझाने की कोशिश न करें; अंगारों के ठंडा होने का इंतज़ार करें।",
+                "જ્યારે આગ ભડકેલી હોય ત્યારે સમાધાન ન શોધો; વાતાવરણ શાંત થવાની રાહ જુઓ."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("3. Consistency & Predictable Boundaries", "3. निरंतरता और स्पष्ट मर्यादाएं", "3. સુસંગતતા અને સ્પષ્ટ મર્યાદાઓ"),
+            summary = LocalizedString(
+                "Maintaining reliable boundaries that don't expand or collapse depending on emotional weather.",
+                "ऐसी स्पष्ट सीमाएँ बनाए रखना जो किसी के गुस्से या भावुकता के आगे बार-बार न बदलें।",
+                "એવી અડગ મર્યાદાઓ જાળવવી જે કોઈના ગુસ્સા કે લાગણીશીલ દબાણમાં વારંવાર ન તૂટે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Saying 'yes' out of guilt after saying 'no' inadvertently rewards escalation. Consistency signals stability and safety.",
+                    "अपराधबोध में आकर 'ना' को 'हाँ' में बदलना अनजाने में तेज गुस्से को बढ़ावा देता है। दृढ़ता सुरक्षा का अहसास देती है।",
+                    "અપરાધભાવમાં આવીને 'ના' ને 'હા' માં ફેરવવું અજાણતાં ગુસ્સાને પ્રોત્સાહન આપે છે. સુસંગતતા સુરક્ષાની ખાતરી આપે છે."
+                ),
+                LocalizedString(
+                    "Boundaries are about what YOU will do, not what you force them to do (e.g., 'I will step out if doors are slammed').",
+                    "सीमाएं इस बारे में हैं कि आप क्या करेंगे, न कि आप उन पर क्या थोपेंगे (जैसे: 'अगर दरवाजे पटके गए, तो मैं बाहर चला जाऊंगा')।",
+                    "મર્યાદાઓ એ વિશે છે કે તમે શું કરશો, સામેવાળા પર શું લાદશો તે નહીં (જેમ કે: 'જો બારણાં પછાડાશે તો હું બહાર જઈશ')."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Predictable limits reduce underlying anxiety by making the world consistent and safe.",
+                "निश्चित सीमाएँ दुनिया को सुरक्षित और पूर्वानुमानित बनाकर बेचैनी को कम करती हैं।",
+                "નિશ્ચિત મર્યાદાઓ પરિસ્થિતિને અનુમાનિત બનાવી ચિંતામાં ઘટાડો કરે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("4. Collaborative Crisis Planning", "4. आपातकालीन संकट योजना", "4. કટોકટી વ્યવસ્થાપન આયોજન"),
+            summary = LocalizedString(
+                "Agreeing in advance on warning signs and emergency steps during peacetime.",
+                "शांत समय में ही मिलकर तय करना कि संकट के समय कौन से कदम उठाए जाएंगे और किन नंबरों पर संपर्क होगा।",
+                "શાંત સમયમાં જ સાથે મળીને નક્કી કરવું કે કટોકટી વખતે કયા પગલાં લેવાશે અને કયા નંબરો પર સંપર્ક કરવો."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Write down a brief one-page Crisis Agreement: identifying early triggers, agreed de-escalation actions, safe quiet spaces, and emergency contact numbers (Tele-MANAS 14416, trusted doctor).",
+                    "एक पृष्ठ की संकट योजना बनाएं: शुरुआती तनाव के संकेत, शांत होने के तय तरीके, और हेल्पलाइन नंबर (Tele-MANAS 14416, डॉक्टर का संपर्क)।",
+                    "એક પાનાનું કટોકટી આયોજન તૈયાર કરો: શરૂઆતી તણાવના સંકેતો, શાંત થવાના નક્કી કરેલા રસ્તા અને હેલ્પલાઇન નંબરો (Tele-MANAS 14416, ડૉક્ટરનો સંપર્ક)."
+                ),
+                LocalizedString(
+                    "Keep copies easily visible so no one has to invent decisions under intense emergency panic.",
+                    "इसे ऐसी जगह रखें जहाँ यह तुरंत दिखे ताकि संकट के समय किसी को घबराहट में सोचना न पड़े।",
+                    "તેને એવી જગ્યાએ રાખો જેથી કટોકટી વખતે કોઈને ગભરાટમાં નિર્ણયો શોધવા ન પડે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "A written crisis plan turns emergency chaos into orderly, life-saving teamwork.",
+                "लिखित संकट योजना घबराहट भरे माहौल को व्यवस्थित और जीवन-रक्षक सहयोग में बदल देती है।",
+                "લેખિત કટોકટી યોજના ગભરાટને બદલે વ્યવસ્થિત અને જીવનરક્ષક ટીમવર્ક પૂરું પાડે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("5. Supporting the Caregiver & Preventing Burnout", "5. देखभालकर्ता की देखभाल और तनाव मुक्ति", "5. સંભાળકર્તાની પોતાની સંભાળ અને આરામ"),
+            summary = LocalizedString(
+                "You cannot pour from an empty cup; protecting caregiver physical and mental health is foundational.",
+                "आप खाली बर्तन से पानी नहीं पिला सकते; अपनी सेहत और मानसिक शांति की रक्षा करना सबसे पहली प्राथमिकता है।",
+                "ખાલી વાસણમાંથી પાણી પીવડાવી શકાતું નથી; પોતાની તંદુરસ્તી અને માનસિક શાંતિ જાળવવી સૌથી પહેલી જરૂરિયાત છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Caregivers frequently suffer from chronic insomnia, guilt, and social isolation. Maintaining personal friendships and regular leisure is essential clinical medicine.",
+                    "देखभालकर्ता अक्सर अनिद्रा, अपराधबोध और अकेलेपन के शिकार हो जाते हैं। अपनी मित्रता और शौक बनाए रखना बहुत ज़रूरी है।",
+                    "સંભાળકર્તાઓ ઘણીવાર અનિદ્રા, અપરાધભાવ અને એકલતાનો ભોગ બને છે. પોતાના મિત્રો અને શોખ જાળવી રાખવા ખૂબ જરૂરી છે."
+                ),
+                LocalizedString(
+                    "Seeking personal counseling for yourself is not a betrayal; it provides private emotional ventilation and boundary coaching.",
+                    "अपने लिए काउंसलर से बात करना कोई गलत बात नहीं है; यह आपको अपनी बात कहने और मजबूत बने रहने का हौसला देता है।",
+                    "પોતાના માટે કાઉન્સેલરની મદદ લેવી કોઈ ખોટી વાત નથી; તે તમને મનની વાત રજૂ કરવા અને મક્કમ રહેવાની હિંમત આપે છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Caring for yourself is the single greatest gift you can offer your loved one.",
+                "अपनी देखभाल करना ही आपके प्रियजन के लिए आपका सबसे बड़ा और सच्चा उपहार है।",
+                "તમારી પોતાની કાળજી લેવી એ જ તમારા સ્વજન માટે તમારી સૌથી મોટી અને સાચી ભેટ છે."
+            )
+        )
+    )
 }
+

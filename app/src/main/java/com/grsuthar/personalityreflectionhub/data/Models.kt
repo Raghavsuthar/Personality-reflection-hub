@@ -219,3 +219,73 @@ data class BoundaryScriptItem(
     val script: LocalizedString,
     val whyItWorks: LocalizedString
 )
+
+enum class FunctioningCategory(val displayName: LocalizedString) {
+    SELF(
+        LocalizedString(
+            en = "Self-Functioning (Identity & Goals)",
+            hi = "आत्म-कार्यप्रणाली (पहचान और लक्ष्य)",
+            gu = "સ્વ-કાર્યપ્રણાલી (ઓળખ અને લક્ષ્યો)"
+        )
+    ),
+    INTERPERSONAL(
+        LocalizedString(
+            en = "Interpersonal Functioning (Relationships & Empathy)",
+            hi = "पारस्परिक कार्यप्रणाली (संबंध और सहानुभूति)",
+            gu = "પરસ્પર કાર્યપ્રણાલી (સંબંધો અને સહાનુભૂતિ)"
+        )
+    )
+}
+
+data class FunctioningQuestion(
+    val id: String,
+    val category: FunctioningCategory,
+    val text: LocalizedString
+)
+
+data class FunctioningResult(
+    val rawScore: Int,
+    val maxScore: Int = 40,
+    val percentage: Float,
+    val selfScore: Int = 0,
+    val maxSelfScore: Int = 20,
+    val interpersonalScore: Int = 0,
+    val maxInterpersonalScore: Int = 20,
+    val impactLevel: Int = 0,
+    val tier: ResultTier,
+    val summary: LocalizedString
+)
+
+data class GlossaryItem(
+    val term: LocalizedString,
+    val plainDefinition: LocalizedString,
+    val whyItMatters: LocalizedString
+)
+
+data class EducationalSectionItem(
+    val title: LocalizedString,
+    val summary: LocalizedString,
+    val details: List<LocalizedString>,
+    val takeaway: LocalizedString
+)
+
+data class ProfessionalRoleInfo(
+    val title: LocalizedString,
+    val qualification: LocalizedString,
+    val whatTheyDo: LocalizedString,
+    val whenToSeeThem: LocalizedString
+)
+
+data class AppointmentStep(
+    val stepNumber: Int,
+    val title: LocalizedString,
+    val summary: LocalizedString,
+    val details: LocalizedString
+)
+
+data class GpReferralPoint(
+    val title: LocalizedString,
+    val rationale: LocalizedString,
+    val practicalTip: LocalizedString
+)
+

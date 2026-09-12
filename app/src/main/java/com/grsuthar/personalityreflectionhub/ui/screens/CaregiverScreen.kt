@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Help
+import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
@@ -238,7 +239,81 @@ fun CaregiverScreen(
             }
         }
 
-        // Section 4: Safety Planning Walkthrough
+        // Section 4: Expressed Emotion (EE): What Evidence Shows Families
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Psychology,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Expressed Emotion (EE): What Science Shows"
+                        Language.HINDI -> "अभिव्यक्त भावना (EE): वैज्ञानिक साक्ष्य"
+                        Language.GUJARATI -> "અભિવ્યક્ત લાગણી (EE): વૈજ્ઞાનિક સંશોધનો"
+                    },
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Text(
+                text = when (language) {
+                    Language.ENGLISH -> "Decades of psychiatric studies prove that family emotional atmosphere profoundly affects recovery. Reducing critical remarks and over-involvement cut relapse rates in half."
+                    Language.HINDI -> "दशकों के मनोरोग शोध बताते हैं कि घर का माहौल सुधार को गहराई से प्रभावित करता है। आलोचना और अत्यधिक दखल कम करने से संकट की संभावना आधी हो जाती है।"
+                    Language.GUJARATI -> "દાયકાઓના તબીબી સંશોધનો દર્શાવે છે કે ઘરનું વાતાવરણ સુધારાને ઊંડી અસર કરે છે. ટીકા અને વધુ પડતી દખલ ઘટાડવાથી કટોકટીની શક્યતા અડધી થઈ જાય છે."
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            CaregiverData.expressedEmotionSection.forEach { item ->
+                CaregiverEducationAccordion(item = item, language = language)
+            }
+        }
+
+        // Section 5: Evidence-Based Family Psychological Management
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Security,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Evidence-Based Family Management"
+                        Language.HINDI -> "पारिवारिक प्रबंधन के 5 प्रमाण-आधारित कदम"
+                        Language.GUJARATI -> "પારિવારિક વ્યવસ્થાપનના ૫ વૈજ્ઞાનિક પગલાં"
+                    },
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Text(
+                text = when (language) {
+                    Language.ENGLISH -> "Foundational practices recommended by clinical guidelines to stabilize the home environment and protect both patient and family wellbeing."
+                    Language.HINDI -> "घर के माहौल को शांत रखने और मरीज व परिवार दोनों की मानसिक सुरक्षा के लिए नैदानिक दिशा-निर्देशों द्वारा समर्थित 5 मुख्य अभ्यास।"
+                    Language.GUJARATI -> "ઘરના વાતાવરણને શાંત રાખવા અને સ્વજન તેમજ કુટુંબ બંનેની સુખાકારી જાળવવા માટે પ્રમાણિત ૫ મહત્વપૂર્ણ વ્યવહારો."
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            CaregiverData.familyManagementSteps.forEach { stepItem ->
+                CaregiverEducationAccordion(item = stepItem, language = language)
+            }
+        }
+
+        // Section 6: Safety Planning Walkthrough
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = CrisisContainer),
@@ -581,6 +656,102 @@ private fun CaregiverGuideAccordion(
                             guide.whenToWorry.forEach { text ->
                                 Text("! ${text.get(language)}", style = MaterialTheme.typography.bodySmall, color = OnCrisisContainer)
                             }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(4.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CaregiverEducationAccordion(
+    item: EducationalSectionItem,
+    language: Language
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(10.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded }
+                    .padding(14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = item.title.get(language),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = item.summary.get(language),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        lineHeight = 18.sp
+                    )
+                }
+                IconButton(onClick = { expanded = !expanded }) {
+                    Icon(
+                        imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                        contentDescription = if (expanded) "Show less" else "Show more",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            AnimatedVisibility(visible = expanded) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 14.dp, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+
+                    item.details.forEach { paragraph ->
+                        Text(
+                            text = paragraph.get(language),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            lineHeight = 22.sp
+                        )
+                    }
+
+                    Surface(
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp)) {
+                            Text(
+                                text = when (language) {
+                                    Language.ENGLISH -> "Key Takeaway for Families:"
+                                    Language.HINDI -> "परिवार के लिए मुख्य सीख:"
+                                    Language.GUJARATI -> "પરિવાર માટે મુખ્ય શીખ:"
+                                },
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = item.takeaway.get(language),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                lineHeight = 18.sp
+                            )
                         }
                     }
 

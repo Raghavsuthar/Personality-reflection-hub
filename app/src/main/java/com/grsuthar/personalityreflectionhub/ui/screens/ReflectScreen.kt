@@ -1,5 +1,6 @@
 package com.grsuthar.personalityreflectionhub.ui.screens
 
+import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -42,6 +44,9 @@ fun ReflectScreen(
 
     var currentDomainIndex by remember { mutableIntStateOf(0) }
     val answers = remember { mutableStateMapOf<String, Int>() } // questionId -> 1..5
+    val functioningResults = remember { mutableStateMapOf<String, Int>() } // func_1..func_8 -> 1..5
+    val functioningAnswers = functioningResults // convenient reference
+    var functioningImpact by remember { mutableIntStateOf(0) } // 0..3
     val domainImpacts = remember { mutableStateMapOf<TraitDomain, Int>() } // domain -> 0..3
     var safetyAnswer by remember { mutableIntStateOf(0) } // 0..2
 
@@ -73,12 +78,14 @@ fun ReflectScreen(
                 onStart = { hasStarted = true }
             )
         } else if (!isCompleted) {
-            // Screen 2: Questionnaire Domain Steps
+            // Screen 2: Questionnaire Steps (6 Domains + Functioning + Safety Check = 8 Steps)
+            val totalSteps = domains.size + 2
+
             if (currentDomain != null) {
                 DomainQuestionnaireStep(
                     domain = currentDomain,
                     stepNumber = currentDomainIndex + 1,
-                    totalSteps = domains.size + 1, // 6 domains + safety check
+                    totalSteps = totalSteps,
                     questions = currentQuestions,
                     answers = answers,
                     onAnswerSelected = { qId, score -> answers[qId] = score },
@@ -87,12 +94,7 @@ fun ReflectScreen(
                     language = language,
                     canProceed = currentQuestions.all { answers.containsKey(it.id) },
                     onNext = {
-                        if (currentDomainIndex < domains.size - 1) {
-                            currentDomainIndex++
-                        } else {
-                            // Move to safety check
-                            currentDomainIndex = domains.size
-                        }
+                        currentDomainIndex++
                     },
                     onBack = {
                         if (currentDomainIndex > 0) {
@@ -103,13 +105,30 @@ fun ReflectScreen(
                     }
                 )
             } else if (currentDomainIndex == domains.size) {
-                // Step 7: Safety Check Step
+                // Step 7: Self & Interpersonal Functioning Module
+                FunctioningQuestionnaireStep(
+                    stepNumber = domains.size + 1,
+                    totalSteps = totalSteps,
+                    questions = AssessmentData.functioningQuestions,
+                    answers = functioningAnswers,
+                    onAnswerSelected = { qId, score -> functioningAnswers[qId] = score },
+                    selectedImpact = functioningImpact,
+                    onImpactSelected = { functioningImpact = it },
+                    language = language,
+                    canProceed = AssessmentData.functioningQuestions.all { functioningAnswers.containsKey(it.id) },
+                    onNext = { currentDomainIndex = domains.size + 1 },
+                    onBack = { currentDomainIndex = domains.size - 1 }
+                )
+            } else if (currentDomainIndex == domains.size + 1) {
+                // Step 8: Safety Check Step
                 SafetyCheckStep(
+                    stepNumber = domains.size + 2,
+                    totalSteps = totalSteps,
                     language = language,
                     safetyAnswer = safetyAnswer,
                     onSafetyAnswerSelected = { safetyAnswer = it },
                     onComplete = { isCompleted = true },
-                    onBack = { currentDomainIndex = domains.size - 1 }
+                    onBack = { currentDomainIndex = domains.size }
                 )
             }
         } else {
@@ -117,10 +136,15 @@ fun ReflectScreen(
             AssessmentResultsView(
                 language = language,
                 answers = answers,
+                functioningResults = functioningResults,
+                functioningAnswers = functioningAnswers,
+                functioningImpact = functioningImpact,
                 domainImpacts = domainImpacts,
                 safetyAnswer = safetyAnswer,
                 onReset = {
                     answers.clear()
+                    functioningResults.clear()
+                    functioningImpact = 0
                     domainImpacts.clear()
                     safetyAnswer = 0
                     currentDomainIndex = 0
@@ -464,7 +488,7 @@ private fun DomainQuestionnaireStep(
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.height(48.dp)
             ) {
-                Text(if (stepNumber == TraitDomain.entries.size) "Next: Safety Check" else "Next Domain")
+                Text(if (stepNumber == TraitDomain.entries.size) "Next: Self & Relationships" else "Next Domain")
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
             }
@@ -473,7 +497,286 @@ private fun DomainQuestionnaireStep(
 }
 
 @Composable
+private fun FunctioningQuestionnaireStep(
+    stepNumber: Int,
+    totalSteps: Int,
+    questions: List<FunctioningQuestion>,
+    answers: Map<String, Int>,
+    onAnswerSelected: (String, Int) -> Unit,
+    selectedImpact: Int,
+    onImpactSelected: (Int) -> Unit,
+    language: Language,
+    canProceed: Boolean,
+    onNext: () -> Unit,
+    onBack: () -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Header
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Text(
+                        text = "Step $stepNumber of $totalSteps",
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = MaterialTheme.colorScheme.secondaryContainer
+                ) {
+                    Text(
+                        text = "ICD-11 Core Dimensions",
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                }
+            }
+
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(
+                    text = AssessmentData.functioningSectionTitle.get(language),
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = AssessmentData.functioningSectionSubtitle.get(language),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    lineHeight = 20.sp
+                )
+            }
+
+            // Self-Functioning Section
+            val selfQuestions = questions.filter { it.category == FunctioningCategory.SELF }
+            Surface(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Part A: Self-Functioning (Identity, Goals & Emotional Stability)"
+                        Language.HINDI -> "भाग क: आत्म-कार्यप्रणाली (पहचान, लक्ष्य और भावनात्मक स्थिरता)"
+                        Language.GUJARATI -> "ભાગ અ: સ્વ-કાર્યપ્રણાલી (ઓળખ, લક્ષ્યો અને લાગણીશીલ સ્થિરતા)"
+                    },
+                    modifier = Modifier.padding(10.dp),
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            selfQuestions.forEachIndexed { index, question ->
+                FunctioningQuestionItem(
+                    index = index + 1,
+                    question = question,
+                    selectedScore = answers[question.id],
+                    onScoreSelected = { score -> onAnswerSelected(question.id, score) },
+                    language = language
+                )
+            }
+
+            // Interpersonal Functioning Section
+            val interQuestions = questions.filter { it.category == FunctioningCategory.INTERPERSONAL }
+            Surface(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Part B: Interpersonal Functioning (Empathy, Trust & Relational Stability)"
+                        Language.HINDI -> "भाग ख: पारस्परिक कार्यप्रणाली (सहानुभूति, विश्वास और संबंध स्थिरता)"
+                        Language.GUJARATI -> "ભાગ બ: પરસ્પર કાર્યપ્રણાલી (સહાનુભૂતિ, વિશ્વાસ અને સંબંધ સ્થિરતા)"
+                    },
+                    modifier = Modifier.padding(10.dp),
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            interQuestions.forEachIndexed { index, question ->
+                FunctioningQuestionItem(
+                    index = selfQuestions.size + index + 1,
+                    question = question,
+                    selectedScore = answers[question.id],
+                    onScoreSelected = { score -> onAnswerSelected(question.id, score) },
+                    language = language
+                )
+            }
+
+            // Functioning Impact Rating
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                shape = RoundedCornerShape(10.dp),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+            ) {
+                Column(
+                    modifier = Modifier.padding(14.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Text(
+                        text = AssessmentData.functioningImpactQuestion.get(language),
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+                    AssessmentData.functioningImpactOptions.forEachIndexed { optIndex, optText ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onImpactSelected(optIndex) }
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedImpact == optIndex,
+                                onClick = { onImpactSelected(optIndex) }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = optText.get(language),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Navigation Buttons
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                OutlinedButton(
+                    onClick = onBack,
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.height(48.dp)
+                ) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Back")
+                }
+
+                Button(
+                    onClick = onNext,
+                    enabled = canProceed,
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.height(48.dp)
+                ) {
+                    Text("Next: Safety Check")
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun FunctioningQuestionItem(
+    index: Int,
+    question: FunctioningQuestion,
+    selectedScore: Int?,
+    onScoreSelected: (Int) -> Unit,
+    language: Language
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(10.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(
+                text = "$index. ${question.text.get(language)}",
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                for (score in 1..5) {
+                    val isSelected = selectedScore == score
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .weight(1f)
+                            .clickable { onScoreSelected(score) }
+                            .padding(vertical = 4.dp)
+                    ) {
+                        Surface(
+                            modifier = Modifier.size(36.dp),
+                            shape = CircleShape,
+                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                            border = BorderStroke(
+                                1.dp,
+                                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
+                            )
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Text(
+                                    text = score.toString(),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = when (score) {
+                                1 -> "Disagree"
+                                3 -> "Neutral"
+                                5 -> "Agree"
+                                else -> ""
+                            },
+                            style = MaterialTheme.typography.labelSmall,
+                            fontSize = 9.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun SafetyCheckStep(
+    stepNumber: Int,
+    totalSteps: Int,
     language: Language,
     safetyAnswer: Int,
     onSafetyAnswerSelected: (Int) -> Unit,
@@ -492,6 +795,37 @@ private fun SafetyCheckStep(
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Text(
+                        text = "Step $stepNumber of $totalSteps",
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = if (safetyAnswer > 0) CrisisContainer else MaterialTheme.colorScheme.surfaceVariant
+                ) {
+                    Text(
+                        text = "Safety Protocol",
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = if (safetyAnswer > 0) CrisisRed else MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -580,6 +914,8 @@ private fun SafetyCheckStep(
                     shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.height(48.dp)
                 ) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
                     Text("Back")
                 }
 
@@ -605,6 +941,9 @@ private fun SafetyCheckStep(
 private fun AssessmentResultsView(
     language: Language,
     answers: Map<String, Int>,
+    functioningResults: Map<String, Int> = emptyMap(),
+    functioningAnswers: Map<String, Int> = functioningResults,
+    functioningImpact: Int = 0,
     domainImpacts: Map<TraitDomain, Int>,
     safetyAnswer: Int,
     onReset: () -> Unit
@@ -633,6 +972,73 @@ private fun AssessmentResultsView(
             tier = tier,
             impactLevel = domainImpacts[domain] ?: 0
         )
+    }
+
+    // Calculate functioning scores using AssessmentData logic
+    val effectiveFuncMap = if (functioningResults.isNotEmpty()) functioningResults else functioningAnswers
+    val functioningResult = AssessmentData.calculateFunctioningResult(effectiveFuncMap, functioningImpact)
+    val selfSum = functioningResult.selfScore
+    val selfMax = functioningResult.maxSelfScore
+    val selfPct = (selfSum - 4).toFloat() / (selfMax - 4).toFloat()
+
+    val interSum = functioningResult.interpersonalScore
+    val interMax = functioningResult.maxInterpersonalScore
+    val interPct = (interSum - 4).toFloat() / (interMax - 4).toFloat()
+
+    val totalFuncSum = functioningResult.rawScore
+    val totalFuncMax = functioningResult.maxScore
+    val functioningTier = functioningResult.tier
+
+    // Calculate aggregate impact level using the same logic as domain assessments
+    val traitHighestImpact = domainResults.maxOfOrNull { it.impactLevel } ?: 0
+    val aggregateImpact = AssessmentData.calculateAggregateImpact(domainResults, functioningResult.impactLevel)
+
+    // Share summary handler
+    fun shareResults() {
+        val sb = StringBuilder()
+        sb.append("=== ").append(when(language) {
+            Language.ENGLISH -> "Personality Reflection Hub — Profile Summary"
+            Language.HINDI -> "व्यक्तित्व चिंतन हब — प्रोफ़ाइल सारांश"
+            Language.GUJARATI -> "વ્યક્તિત્વ ચિંતન હબ — પ્રોફાઇલ સારાંશ"
+        }).append(" ===\n\n")
+
+        sb.append(when(language) {
+            Language.ENGLISH -> "TRAIT DOMAIN REFLECTION (ICD-11 Continuous Model):\n"
+            Language.HINDI -> "लक्षण आयामी चिंतन (ICD-11 निरंतर मॉडल):\n"
+            Language.GUJARATI -> "લક્ષણ આયામી ચિંતન (ICD-11 સતત મોડેલ):\n"
+        })
+        domainResults.forEach { r ->
+            sb.append("• ").append(r.domain.everydayName.get(language))
+                .append(" (").append(r.tier.label.get(language)).append(")")
+                .append(" — Impact: ").append(AssessmentData.impactLevels[r.impactLevel].get(language))
+                .append("\n")
+        }
+
+        sb.append("\n").append(when(language) {
+            Language.ENGLISH -> "SELF & INTERPERSONAL FUNCTIONING (ICD-11 Core Dimensions):\n"
+            Language.HINDI -> "आत्म एवं पारस्परिक कार्यप्रणाली (ICD-11 मूल आयाम):\n"
+            Language.GUJARATI -> "સ્વ અને પરસ્પર કાર્યપ્રણાલી (ICD-11 મૂળ આયામ):\n"
+        })
+        sb.append("• Overall: ").append(functioningTier.label.get(language)).append(" (").append(totalFuncSum).append("/").append(totalFuncMax).append(")\n")
+        sb.append("• Self-Functioning: ").append(selfSum).append("/").append(selfMax).append(" (Identity, Self-Worth, Goals)\n")
+        sb.append("• Interpersonal Skills: ").append(interSum).append("/").append(interMax).append(" (Empathy, Trust, Relational Stability)\n")
+        sb.append("• Everyday Impact: ").append(AssessmentData.functioningImpactOptions[functioningResult.impactLevel].get(language)).append("\n")
+        AssessmentData.functioningTierSummaries[functioningTier]?.let {
+            sb.append(it.get(language)).append("\n")
+        }
+
+        sb.append("\n").append(when(language) {
+            Language.ENGLISH -> "IMPORTANT NOTICE: This is an educational self-reflection summary, NOT a psychiatric or medical diagnosis. A true evaluation requires clinical consultation with a licensed professional.\n\nSupport in India:\n• Tele-MANAS (24/7): 14416\n• National Emergency: 112"
+            Language.HINDI -> "महत्वपूर्ण सूचना: यह केवल एक शैक्षिक आत्म-चिंतन सारांश है, कोई चिकित्सीय निदान नहीं। वास्तविक मूल्यांकन के लिए विशेषज्ञ से परामर्श आवश्यक है।\n\nभारत में सहायता:\n• टेली-मानस (24/7): 14416\n• आपातकालीन: 112"
+            Language.GUJARATI -> "મહત્વપૂર્ણ સૂચના: આ માત્ર શૈક્ષણિક સ્વ-ચિંતન સારાંશ છે, કોઈ તબીબી નિદાન નથી. વાસ્તવિક મૂલ્યાંકન માટે નિષ્ણાતની સલાહ જરૂરી છે.\n\nભારતમાં સહાય:\n• ટેલી-માનસ (24/7): 14416\n• કટોકટી: 112"
+        })
+
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_SUBJECT, "Personality Reflection Summary")
+            putExtra(Intent.EXTRA_TEXT, sb.toString())
+        }
+        context.startActivity(Intent.createChooser(sendIntent, "Share Summary"))
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -742,7 +1148,7 @@ private fun AssessmentResultsView(
             }
         }
 
-        // Domain Result Cards
+        // Trait Domain Result Cards
         domainResults.forEach { result ->
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -857,7 +1263,164 @@ private fun AssessmentResultsView(
             }
         }
 
-        // 4. NEW: Why This Reflection Matters (purpose)
+        // Dedicated Card: Self & Interpersonal Functioning (ICD-11 Core Dimensions)
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f)),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = AssessmentData.functioningSectionTitle.get(language),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                        Text(
+                            text = "ICD-11 Severity Core: Self & Relational Functioning",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(6.dp),
+                        color = MaterialTheme.colorScheme.secondaryContainer
+                    ) {
+                        Text(
+                            text = functioningTier.label.get(language),
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    }
+                }
+
+                // Sub-dimension 1: Self-Functioning
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = when (language) {
+                                Language.ENGLISH -> "Self-Functioning (Identity, Goals, Self-Worth):"
+                                Language.HINDI -> "आत्म-कार्यप्रणाली (पहचान, लक्ष्य, आत्म-मूल्य):"
+                                Language.GUJARATI -> "સ્વ-કાર્યપ્રણાલી (ઓળખ, લક્ષ્યો, આત્મસન્માન):"
+                            },
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Text(
+                            text = "$selfSum / $selfMax",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    LinearProgressIndicator(
+                        progress = { selfPct.coerceIn(0.05f, 1f) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                            .clip(RoundedCornerShape(4.dp)),
+                        color = MaterialTheme.colorScheme.secondary,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                }
+
+                // Sub-dimension 2: Interpersonal Functioning
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = when (language) {
+                                Language.ENGLISH -> "Interpersonal Skills (Empathy, Trust, Stability):"
+                                Language.HINDI -> "पारस्परिक कौशल (सहानुभूति, विश्वास, स्थिरता):"
+                                Language.GUJARATI -> "પરસ્પર કૌશલ્ય (સહાનુભૂતિ, વિશ્વાસ, સ્થિરતા):"
+                            },
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Text(
+                            text = "$interSum / $interMax",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    LinearProgressIndicator(
+                        progress = { interPct.coerceIn(0.05f, 1f) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                            .clip(RoundedCornerShape(4.dp)),
+                        color = MaterialTheme.colorScheme.secondary,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                }
+
+                // Functioning Everyday Impact Chip
+                Surface(
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            text = when (language) {
+                                Language.ENGLISH -> "Everyday Life Impact: "
+                                Language.HINDI -> "दैनिक जीवन पर प्रभाव: "
+                                Language.GUJARATI -> "દૈનિક જીવન પર પ્રભાવ: "
+                            } + AssessmentData.functioningImpactOptions[functioningResult.impactLevel].get(language),
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
+                // Tier Summary interpretation
+                AssessmentData.functioningTierSummaries[functioningTier]?.let { summary ->
+                    Surface(
+                        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.35f),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Text(
+                            text = summary.get(language),
+                            modifier = Modifier.padding(12.dp),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            lineHeight = 18.sp
+                        )
+                    }
+                }
+            }
+        }
+
+        // 4. Why This Reflection Matters (purpose statement)
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -894,9 +1457,9 @@ private fun AssessmentResultsView(
             }
         }
 
-        // 5. NEW: Your Next Steps (personalized based on actual results)
+        // 5. Your Next Steps (personalized based on trait domains, functioning module, and everyday impact)
         val elevatedDomains = domainResults.filter { it.tier == ResultTier.MORE_THAN_MOST }
-        val highestImpact = domainResults.maxOfOrNull { it.impactLevel } ?: 0
+        val highestImpact = aggregateImpact
 
         Card(
             modifier = Modifier.fillMaxWidth(),
@@ -925,7 +1488,7 @@ private fun AssessmentResultsView(
                     )
                 }
 
-                // Step A: Domain callout (only if at least one domain is MORE_THAN_MOST)
+                // Step A: Domain callout (if any domain is MORE_THAN_MOST)
                 if (elevatedDomains.isNotEmpty()) {
                     val domainNames = elevatedDomains.joinToString(", ") { it.domain.everydayName.get(language) }
                     Surface(
@@ -943,7 +1506,57 @@ private fun AssessmentResultsView(
                     }
                 }
 
-                // Step B: Tiered guidance based on highest impact level reported
+                // Step B: Functioning callout if functioning indicates strain or moderate/severe impact
+                if (functioningTier == ResultTier.MORE_THAN_MOST || functioningResult.impactLevel >= 2) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.08f),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Text(
+                            text = when (language) {
+                                Language.ENGLISH -> "Self & Relational Note: Your responses indicate noticeable strain in your internal sense of stability or in maintaining smooth relationships. Under modern psychiatric practice, building skills for self-soothing and interpersonal effectiveness (such as through DBT or Schema Therapy) can provide substantial relief."
+                                Language.HINDI -> "आत्म एवं संबंध टिप्पणी: आपके उत्तर आत्म-स्थिरता या रिश्तों को सुचारू रखने में उल्लेखनीय खिंचाव दर्शाते हैं। आधुनिक मनोचिकित्सा में, स्वयं को शांत करने और रिश्तों को संभालने के कौशल (जैसे DBT या स्कीमा थेरेपी) सीखने से काफी राहत मिल सकती है।"
+                                Language.GUJARATI -> "સ્વ અને સંબંધ નોંધ: તમારા જવાબો આત્મ-સ્થિરતા અથવા સંબંધો જાળવવામાં નોંધપાત્ર તણાવ દર્શાવે છે. આધુનિક મનોચિકિત્સામાં, જાતને શાંત કરવા અને સંબંધો સંભાળવાના કૌશલ્યો (જેમ કે DBT કે સ્કીમા થેરાપી) શીખવાથી નોંધપાત્ર રાહત મળી શકે છે."
+                            },
+                            modifier = Modifier.padding(12.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            lineHeight = 20.sp
+                        )
+                    }
+                }
+
+                // Step C: Specific Functioning Impact Guidance
+                AssessmentData.functioningImpactGuidance[functioningResult.impactLevel]?.let { funcGuidance ->
+                    Surface(
+                        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.35f),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = when (language) {
+                                    Language.ENGLISH -> "Functioning Recommendation (${AssessmentData.functioningImpactOptions[functioningResult.impactLevel].get(language)}):"
+                                    Language.HINDI -> "कार्यप्रणाली अनुशंसा (${AssessmentData.functioningImpactOptions[functioningResult.impactLevel].get(language)}):"
+                                    Language.GUJARATI -> "કાર્યપ્રણાલી ભલામણ (${AssessmentData.functioningImpactOptions[functioningResult.impactLevel].get(language)}):"
+                                },
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.secondary
+                            )
+                            Text(
+                                text = funcGuidance.get(language),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                lineHeight = 18.sp
+                            )
+                        }
+                    }
+                }
+
+                // Step D: Tiered guidance based on highest combined impact level reported
                 val tieredGuidance = AssessmentData.nextStepsTieredGuidance.getOrElse(highestImpact.coerceIn(0, 3)) {
                     AssessmentData.nextStepsTieredGuidance[0]
                 }.get(language)
@@ -1011,24 +1624,47 @@ private fun AssessmentResultsView(
             }
         }
 
-        // 7. Reset Assessment Button
-        Button(
-            onClick = onReset,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+        // 7. Actions: Share Summary & Reset Buttons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
-            Spacer(modifier = Modifier.width(6.dp))
-            Text(
-                text = when (language) {
-                    Language.ENGLISH -> "Reset & Take Again"
-                    Language.HINDI -> "रीसेट करें और दोबारा शुरू करें"
-                    Language.GUJARATI -> "રીસેટ કરો અને ફરીથી શરૂ કરો"
-                }
-            )
+            OutlinedButton(
+                onClick = { shareResults() },
+                modifier = Modifier
+                    .weight(1f)
+                    .height(48.dp),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Share Summary"
+                        Language.HINDI -> "सारांश साझा करें"
+                        Language.GUJARATI -> "સારાંશ શેર કરો"
+                    }
+                )
+            }
+
+            Button(
+                onClick = onReset,
+                modifier = Modifier
+                    .weight(1f)
+                    .height(48.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            ) {
+                Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Reset"
+                        Language.HINDI -> "रीसेट करें"
+                        Language.GUJARATI -> "રીસેટ કરો"
+                    }
+                )
+            }
         }
     }
 }

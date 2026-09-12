@@ -488,4 +488,227 @@ object AssessmentData {
             Language.GUJARATI -> "આજના તમારા ચિંતનમાં આ ક્ષેત્રોમાં વધુ પ્રબળ વલણો જણાયા છે: $domainNames। તમે 'પેટર્ન' (Patterns) વિભાગમાં જઈને વાંચી શકો છો કે આ દરેક ક્ષેત્રમાં શું મદદરૂપ થઈ શકે છે."
         }
     }
+
+    // --- Self & Interpersonal Functioning Module (ICD-11 Core Dimensions) ---
+    val functioningSectionTitle = LocalizedString(
+        en = "Self & Interpersonal Functioning",
+        hi = "आत्म एवं पारस्परिक कार्यप्रणाली",
+        gu = "સ્વ અને પરસ્પર કાર્યપ્રણાલી"
+    )
+
+    val functioningSectionSubtitle = LocalizedString(
+        en = "In modern clinical guidance (ICD-11), personality wellbeing is measured not just by specific traits, but by how securely you experience yourself and how steadily you relate to others in daily life.",
+        hi = "आधुनिक चिकित्सा मार्गदर्शन (ICD-11) में, व्यक्तित्व स्वास्थ्य केवल विशिष्ट लक्षणों से नहीं, बल्कि इस बात से मापा जाता है कि आप स्वयं को कितना स्थिर अनुभव करते हैं और दैनिक जीवन में दूसरों से कितने सहज रूप से जुड़ते हैं।",
+        gu = "આધુનિક તબીબી માર્ગદર્શન (ICD-11) મુજબ, વ્યક્તિત્વ સ્વાસ્થ્ય માત્ર ચોક્કસ લક્ષણો પરથી નહીં, પરંતુ તમે તમારી જાતને કેટલી સ્થિરતાથી અનુભવો છો અને અન્યો સાથે કેટલી સુમેળતાથી જોડાઓ છો તેના પરથી મપાય છે."
+    )
+
+    val functioningQuestions: List<FunctioningQuestion> = listOf(
+        // Self-Functioning: Identity, Self-Worth, Self-Direction, Emotional Self-Regulation
+        FunctioningQuestion(
+            id = "func_1",
+            category = FunctioningCategory.SELF,
+            text = LocalizedString(
+                en = "I often feel unsure of who I really am, or my core sense of identity changes frequently depending on circumstances.",
+                hi = "मुझे अक्सर अनिश्चितता महसूस होती है कि मैं वास्तव में कौन हूँ, या परिस्थितियों के अनुसार मेरी आत्म-पहचान बार-बार बदलती रहती है।",
+                gu = "હું વાસ્તવમાં કોણ છું તે અંગે મને ઘણીવાર અનિશ્ચિતતા રહે છે, અથવા સંજોગો મુજબ મારી આત્મ-ઓળખ વારંવાર બદલાતી રહે છે."
+            )
+        ),
+        FunctioningQuestion(
+            id = "func_2",
+            category = FunctioningCategory.SELF,
+            text = LocalizedString(
+                en = "My self-esteem is fragile; small setbacks or perceived criticisms make my sense of worth collapse.",
+                hi = "मेरा आत्म-सम्मान बहुत नाज़ुक है; छोटी-सी असफलता या हल्की आलोचना भी मेरे आत्म-मूल्य को झकझोर देती है।",
+                gu = "મારો આત્મસન્માન ખૂબ સંવેદનશીલ છે; નાની નિષ્ફળતા કે હળવી ટીકા પણ મારા આત્મ-મૂલ્યને તોડી પાડે છે."
+            )
+        ),
+        FunctioningQuestion(
+            id = "func_3",
+            category = FunctioningCategory.SELF,
+            text = LocalizedString(
+                en = "I struggle to establish realistic, meaningful personal goals and follow through on them consistently.",
+                hi = "व्यावहारिक एवं अर्थपूर्ण व्यक्तिगत लक्ष्य निर्धारित करने और उन पर लगातार टिके रहने में मुझे कठिनाई होती है।",
+                gu = "વ્યવહારુ અને સાર્થક અંગત લક્ષ્યો નક્કી કરવામાં અને તેના પર સતત વળગી રહેવામાં મને મુશ્કેલી પડે છે."
+            )
+        ),
+        FunctioningQuestion(
+            id = "func_4",
+            category = FunctioningCategory.SELF,
+            text = LocalizedString(
+                en = "When painful emotions strike, I feel overwhelmed and unable to soothe or stabilize myself internally.",
+                hi = "जब कष्टदायी भावनाएँ उभरती हैं, तो मैं अत्यधिक व्याकुल हो जाता हूँ और खुद को शांत या स्थिर करने में असमर्थ पाता हूँ।",
+                gu = "જ્યારે પીડાદાયક લાગણીઓ ઊભરી આવે છે, ત્યારે હું અતિશય અસ્વસ્થ થઈ જાઉં છું અને જાતને શાંત કે સ્થિર કરવામાં લાચાર અનુભવું છું."
+            )
+        ),
+        // Interpersonal Functioning: Perspective-Taking, Relational Stability, Trust, Conflict Resolution
+        FunctioningQuestion(
+            id = "func_5",
+            category = FunctioningCategory.INTERPERSONAL,
+            text = LocalizedString(
+                en = "During disagreements, I find it very hard to step back and understand what the other person might be experiencing.",
+                hi = "मतभेदों के दौरान, मेरे लिए यह समझना बहुत कठिन होता है कि दूसरा व्यक्ति क्या महसूस कर रहा होगा।",
+                gu = "મતભેદો વખતે, અન્ય વ્યક્તિ શું અનુભવી રહી હશે તે સમજવું મારા માટે ખૂબ મુશ્કેલ બની જાય છે."
+            )
+        ),
+        FunctioningQuestion(
+            id = "func_6",
+            category = FunctioningCategory.INTERPERSONAL,
+            text = LocalizedString(
+                en = "My close relationships tend to swing between intense closeness and sudden distance or hostility.",
+                hi = "मेरे करीबी रिश्ते अत्यधिक आत्मीयता और अचानक दूरी या कटुता के बीच झूलते रहते हैं।",
+                gu = "મારા અંગત સંબંધો અતિશય નિકટતા અને અચાનક અંતર કે કડવાશ વચ્ચે ઝૂલ્યા કરે છે."
+            )
+        ),
+        FunctioningQuestion(
+            id = "func_7",
+            category = FunctioningCategory.INTERPERSONAL,
+            text = LocalizedString(
+                en = "I hold deep apprehension that people will eventually let me down, leading me to keep excessive emotional guards up.",
+                hi = "मुझे गहरा डर रहता है कि लोग अंततः मुझे निराश करेंगे, जिससे मैं अत्यधिक भावनात्मक दूरी बनाए रखता हूँ।",
+                gu = "મને ઊંડો ડર રહે છે કે લોકો આખરે મને નિરાશ કરશે, જેથી હું વધુ પડતું ભાવનાત્મક અંતર રાખું છું."
+            )
+        ),
+        FunctioningQuestion(
+            id = "func_8",
+            category = FunctioningCategory.INTERPERSONAL,
+            text = LocalizedString(
+                en = "When conflicts occur with friends or family, they frequently escalate into prolonged arguments or painful relationship breaks.",
+                hi = "जब अपनों के साथ विवाद होते हैं, तो वे अक्सर लंबी लड़ाइयों या कष्टदायी अलगाव में बदल जाते हैं।",
+                gu = "જ્યારે સ્વજનો સાથે વિવાદ થાય છે, ત્યારે તે ઘણીવાર લાંબી તકરાર અથવા સંબંધોમાં તિરાડમાં પરિણમે છે."
+            )
+        )
+    )
+
+    val functioningTierSummaries = mapOf(
+        ResultTier.LESS_THAN_MOST to LocalizedString(
+            en = "Solid Self & Relational Stability: You report a generally clear, secure sense of identity and steady, constructive patterns in your relationships with others.",
+            hi = "मजबूत आत्म एवं संबंध स्थिरता: आप अपनी पहचान में स्पष्टता और दूसरों के साथ रिश्तों में स्थिर व रचनात्मक संवाद का अनुभव करते हैं।",
+            gu = "મજબૂત સ્વ અને સંબંધ સ્થિરતા: તમે તમારી ઓળખમાં સ્પષ્ટતા અને અન્ય લોકો સાથેના સંબંધોમાં સ્થિર તેમજ રચનાત્મક વ્યવહાર અનુભવો છો."
+        ),
+        ResultTier.ABOUT_TYPICAL to LocalizedString(
+            en = "Moderate Fluctuations: Like many adults, you occasionally experience self-doubt or relationship friction, but generally maintain basic life goals and bonds.",
+            hi = "सामान्य उतार-चढ़ाव: अधिकांश वयस्कों की तरह, आप कभी-कभार आत्म-संदेह या रिश्तों में खिंचाव महसूस करते हैं, लेकिन बुनियादी लक्ष्यों और रिश्तों को संभाल लेते हैं।",
+            gu = "સામાન્ય ઉતાર-ચઢાવ: મોટાભાગના પુખ્ત વયના લોકોની જેમ, તમે ક્યારેક આત્મ-શંકા કે સંબંધોમાં તણાવ અનુભવો છો, પરંતુ સામાન્ય રીતે મૂળભૂત લક્ષ્યો અને સંબંધો જાળવી રાખો છો."
+        ),
+        ResultTier.MORE_THAN_MOST to LocalizedString(
+            en = "Notable Strain in Self & Relationships: You report marked instability in self-worth, emotional regulation, or close connections. In ICD-11, this functioning dimension is key when considering whether professional support would bring relief.",
+            hi = "आत्म एवं संबंधों में उल्लेखनीय तनाव: आप आत्म-मूल्य, भावनात्मक संतुलन या करीबी रिश्तों में उल्लेखनीय अस्थिरता अनुभव करते हैं। ICD-11 के अनुसार, यह कार्यप्रणाली यह तय करने में प्रमुख है कि क्या पेशेवर मदद आपके लिए उपयोगी होगी।",
+            gu = "સ્વ અને સંબંધોમાં નોંધપાત્ર તણાવ: તમે આત્મ-મૂલ્ય, લાગણીશીલ નિયંત્રણ કે અંગત સંબંધોમાં નોંધપાત્ર અસ્થિરતા અનુભવો છો. ICD-11 મુજબ, શું કોઈ નિષ્ણાતની સહાય રાહત આપી શકે તે નક્કી કરવા માટે આ ક્ષમતા સૌથી મહત્વપૂર્ણ છે."
+        )
+    )
+
+    val functioningImpactQuestion = LocalizedString(
+        en = "Everyday Impact of Self & Relational Difficulties: How much do challenges with identity, self-worth, or relationships affect your daily life, work, education, or personal peace?",
+        hi = "आत्म एवं संबंधों का दैनिक असर: आत्म-पहचान, आत्म-सम्मान या रिश्तों की चुनौतियाँ आपके दैनिक जीवन, काम, पढ़ाई या मानसिक शांति को कितना प्रभावित करती हैं?",
+        gu = "સ્વ અને સંબંધોની દૈનિક અસર: આત્મ-ઓળખ, આત્મસન્માન કે સંબંધોની મુશ્કેલીઓ તમારા દૈનિક જીવન, કામ, અભ્યાસ કે માનસિક શાંતિને કેટલી અસર કરે છે?"
+    )
+
+    val functioningImpactOptions = listOf(
+        LocalizedString(
+            en = "0 - Minimal: Little or no disruption to my daily life, goals, or relationships",
+            hi = "0 - न्यूनतम: मेरे दैनिक जीवन, लक्ष्यों या रिश्तों में कोई खास बाधा नहीं",
+            gu = "0 - નહિવત: મારા દૈનિક જીવન, લક્ષ્યો કે સંબંધોમાં કોઈ ખાસ અડચણ નથી"
+        ),
+        LocalizedString(
+            en = "1 - Mild: Occasional self-doubt or minor friction with loved ones or colleagues",
+            hi = "1 - हल्का: कभी-कभार आत्म-संदेह या अपनों व सहकर्मियों के साथ हल्की अनबन",
+            gu = "1 - હળવું: ક્યારેક આત્મ-શંકા કે સ્વજનો અને સહકર્મચારીઓ સાથે સામાન્ય મતભેદ"
+        ),
+        LocalizedString(
+            en = "2 - Moderate: Recurring strain on my goals, fragile self-esteem, or strained bonds",
+            hi = "2 - मध्यम: लक्ष्यों पर बार-बार असर, नाज़ुक आत्म-सम्मान या रिश्तों में खिंचाव",
+            gu = "2 - મધ્યમ: લક્ષ્યો પર વારંવાર અસર, નાજુક આત્મસન્માન કે સંબંધોમાં તણાવ"
+        ),
+        LocalizedString(
+            en = "3 - Severe: Major emotional distress, painful relationship ruptures, or struggle to function",
+            hi = "3 - गंभीर: अत्यधिक भावनात्मक पीड़ा, रिश्तों में गहरी दरार या सामान्य कामकाज में गंभीर बाधा",
+            gu = "3 - ગંભીર: અતિશય લાગણીશીલ પીડા, સંબંધોમાં મોટી તિરાડ કે સામાન્ય કામકાજમાં ગંભીર મુશ્કેલી"
+        )
+    )
+
+    val functioningImpactGuidance = mapOf(
+        0 to LocalizedString(
+            en = "Functioning Impact - Minimal: Your internal sense of self and interpersonal relationships are currently grounded. Continuing mindfulness, value-based reflection, and mutual communication will preserve this foundation.",
+            hi = "कार्यप्रणाली प्रभाव - न्यूनतम: आपकी आत्म-छवि और पारस्परिक संबंध फिलहाल संतुलित हैं। माइंडफुलनेस और खुला संवाद इस स्थिरता को बनाए रखेगा।",
+            gu = "કાર્યપ્રણાલી પ્રભાવ - નહિવત: તમારી આત્મ-છબી અને પરસ્પર સંબંધો હાલમાં સંતુલિત છે. માઇન્ડફુલનેસ અને મુક્ત સંવાદ આ સ્થિરતા જાળવી રાખશે."
+        ),
+        1 to LocalizedString(
+            en = "Functioning Impact - Mild: You experience periodic self-doubt or relational sensitivity. Regular self-compassion exercises and clear perspective-taking during disagreements can prevent small misunderstandings from becoming chronic stress.",
+            hi = "कार्यप्रणाली प्रभाव - हल्का: आप समय-समय पर आत्म-संदेह या रिश्तों में संवेदनशीलता अनुभव करते हैं। आत्म-सहानुभूति और बातचीत के समय दूसरे का नजरिया समझने का अभ्यास इन्हें तनाव बनने से रोकेगा।",
+            gu = "કાર્યપ્રણાલી પ્રભાવ - હળવો: તમે સમયાંતરે આત્મ-શંકા કે સંબંધોમાં સંવેદનશીલતા અનુભવો છો. આત્મ-સહાનુભૂતિ અને વાર્તાલાપ વખતે અન્ય વ્યક્તિનો દ્રષ્ટિકોણ સમજવાનો અભ્યાસ ગેરસમજ ટાળવામાં મદદરૂપ બનશે."
+        ),
+        2 to LocalizedString(
+            en = "Functioning Impact - Moderate: Difficulties with self-worth or relational friction are creating noticeable disruption. Evidence-based skills training (such as DBT emotional regulation, distress tolerance, and interpersonal effectiveness) offers practical, proven ways to regain calm and rebuild relational confidence.",
+            hi = "कार्यप्रणाली प्रभाव - मध्यम: आत्म-सम्मान या रिश्तों की चुनौतियाँ जीवन में स्पष्ट व्यवधान पैदा कर रही हैं। साक्ष्य-आधारित कौशल (जैसे DBT की भावनात्मक स्थिरता और पारस्परिक प्रभावशीलता) शांति और आत्मविश्वास लौटाने में बेहद मददगार सिद्ध होते हैं।",
+            gu = "કાર્યપ્રણાલી પ્રભાવ - મધ્યમ: આત્મસન્માન કે સંબંધોની મુશ્કેલીઓ જીવનમાં સ્પષ્ટ અડચણ પેદા કરી રહી છે. પુરાવા-આધારિત કૌશલ્યો (જેમ કે DBT લાગણીશીલ સ્થિરતા અને સંબંધ સંભાળવાની કુશળતા) શાંતિ અને આત્મવિશ્વાસ પુનઃસ્થાપિત કરવામાં ખૂબ ઉપયોગી સાબિત થાય છે."
+        ),
+        3 to LocalizedString(
+            en = "Functioning Impact - Severe: You are experiencing significant distress regarding your identity, worth, or acute relationship volatility. Reaching out to a licensed psychologist or psychiatrist for personalized, compassionate care is strongly recommended to support your emotional safety and long-term healing.",
+            hi = "कार्यप्रणाली प्रभाव - गंभीर: आप अपनी पहचान, आत्म-सम्मान या रिश्तों में गहरी उथल-पुथल और पीड़ा महसूस कर रहे हैं। अपनी भावनात्मक सुरक्षा और दीर्घकालिक सुधार के लिए किसी लाइसेंस प्राप्त मनोवैज्ञानिक या मनोचिकित्सक से संपर्क करने की दृढ़ता से सलाह दी जाती है।",
+            gu = "કાર્યપ્રણાલી પ્રભાવ - ગંભીર: તમે તમારી ઓળખ, આત્મસન્માન કે સંબંધોમાં ઊંડી અશાંતિ અને પીડા અનુભવી રહ્યા છો. તમારી માનસિક સુરક્ષા અને લાંબા ગાળાના સ્વાસ્થ્ય માટે કોઈ માન્યતા પ્રાપ્ત મનોચિકિત્સક કે સાયકોલોજિસ્ટનો સંપર્ક કરવાની ભારપૂર્વક ભલામણ કરવામાં આવે છે."
+        )
+    )
+
+    fun calculateFunctioningResult(
+        answers: Map<String, Int>,
+        reportedImpactLevel: Int = 0
+    ): FunctioningResult {
+        val selfQuestions = functioningQuestions.filter { it.category == FunctioningCategory.SELF }
+        val selfSum = selfQuestions.sumOf { answers[it.id] ?: 3 }
+        val selfMin = selfQuestions.size * 1
+        val selfMax = selfQuestions.size * 5
+
+        val interQuestions = functioningQuestions.filter { it.category == FunctioningCategory.INTERPERSONAL }
+        val interSum = interQuestions.sumOf { answers[it.id] ?: 3 }
+        val interMin = interQuestions.size * 1
+        val interMax = interQuestions.size * 5
+
+        val totalFuncSum = selfSum + interSum
+        val totalFuncMin = selfMin + interMin
+        val totalFuncMax = selfMax + interMax
+        val totalFuncPct = (totalFuncSum - totalFuncMin).toFloat() / (totalFuncMax - totalFuncMin).toFloat()
+
+        // Same tier logic as domain assessments
+        val tier = when {
+            totalFuncPct < 0.35f -> ResultTier.LESS_THAN_MOST
+            totalFuncPct <= 0.65f -> ResultTier.ABOUT_TYPICAL
+            else -> ResultTier.MORE_THAN_MOST
+        }
+
+        // Calculate aggregate impact level using the same logic as domain assessments
+        val derivedImpactFromTier = when (tier) {
+            ResultTier.MORE_THAN_MOST -> 2
+            ResultTier.ABOUT_TYPICAL -> 1
+            ResultTier.LESS_THAN_MOST -> 0
+        }
+        val calculatedImpact = maxOf(reportedImpactLevel, derivedImpactFromTier).coerceIn(0, 3)
+
+        val summary = functioningTierSummaries[tier] ?: functioningTierSummaries[ResultTier.ABOUT_TYPICAL]!!
+
+        return FunctioningResult(
+            rawScore = totalFuncSum,
+            maxScore = totalFuncMax,
+            percentage = totalFuncPct,
+            selfScore = selfSum,
+            maxSelfScore = selfMax,
+            interpersonalScore = interSum,
+            maxInterpersonalScore = interMax,
+            impactLevel = calculatedImpact,
+            tier = tier,
+            summary = summary
+        )
+    }
+
+    /**
+     * Calculates the aggregate impact level across domain assessments and functioning module.
+     * Uses the standard domain assessment logic (maximum impact observed across domains and functioning).
+     */
+    fun calculateAggregateImpact(
+        domainResults: List<DomainResult>,
+        functioningImpact: Int
+    ): Int {
+        val domainMaxImpact = domainResults.maxOfOrNull { it.impactLevel } ?: 0
+        return maxOf(domainMaxImpact, functioningImpact).coerceIn(0, 3)
+    }
 }
+

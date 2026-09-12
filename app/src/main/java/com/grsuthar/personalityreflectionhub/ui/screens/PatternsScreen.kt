@@ -1,5 +1,7 @@
 package com.grsuthar.personalityreflectionhub.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -8,21 +10,26 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.HelpOutline
+import androidx.compose.material.icons.filled.LocalHospital
+import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.filled.QuestionMark
 import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.TrendingUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.grsuthar.personalityreflectionhub.data.Language
-import com.grsuthar.personalityreflectionhub.data.PsychoeducationData
-import com.grsuthar.personalityreflectionhub.data.TraitDomain
+import com.grsuthar.personalityreflectionhub.data.*
 import com.grsuthar.personalityreflectionhub.ui.theme.TealContainer
 import com.grsuthar.personalityreflectionhub.ui.theme.TealDark
 import com.grsuthar.personalityreflectionhub.ui.theme.TealPrimary
@@ -302,6 +309,249 @@ fun PatternsScreen(
                 }
             }
         }
+
+        // Section 6: Understanding the Causes (Etiology & Development)
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Psychology,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Understanding the Causes"
+                        Language.HINDI -> "कारणों को समझना"
+                        Language.GUJARATI -> "કારણોને સમજવું"
+                    },
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Text(
+                text = when (language) {
+                    Language.ENGLISH -> "Personality patterns develop from a natural interplay of biological vulnerability, early caregiving experiences, and stressful life events — not personal weakness."
+                    Language.HINDI -> "व्यक्तित्व पैटर्न जैविक संवेदनशीलता, बचपन के माहौल और जीवन के तनावों के आपसी मेल से बनते हैं — यह किसी की कमजोरी या पसंद नहीं है।"
+                    Language.GUJARATI -> "વ્યક્તિત્વના વલણો જૈવિક સંવેદનશીલતા, બાળપણના વાતાવરણ અને જીવનના તણાવના સમન્વયથી ઘડાય છે — આ કોઈ અંગત નબળાઈ કે પસંદગી નથી."
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            PsychoeducationData.causesSection.forEach { item ->
+                EducationalSectionAccordion(item = item, language = language)
+            }
+        }
+
+        // Section 7: Prognosis, Change & Hope (What Science Shows)
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.TrendingUp,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Prognosis, Change & Hope"
+                        Language.HINDI -> "भविष्य, बदलाव एवं आशा"
+                        Language.GUJARATI -> "સુધારો, પરિવર્તન અને આશા"
+                    },
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Text(
+                text = when (language) {
+                    Language.ENGLISH -> "Scientific follow-up studies reveal that personality patterns are not fixed for life. They soften naturally over adulthood, and targeted skills training creates genuine neuroplastic change."
+                    Language.HINDI -> "वैज्ञानिक शोध बताते हैं कि व्यक्तित्व के लक्षण जीवन भर एक जैसे नहीं रहते। उम्र के साथ वे स्वाभाविक रूप से शांत होते हैं, और सही कौशल सीखने से मस्तिष्क में सकारात्मक बदलाव आता है।"
+                    Language.GUJARATI -> "વૈજ્ઞાનિક સંશોધનો દર્શાવે છે કે વ્યક્તિત્વના લક્ષણો આખી જિંદગી એકસરખા નથી રહેતા. ઉંમર સાથે તેઓ કુદરતી રીતે હળવા બને છે અને સાચા કૌશલ્યો શીખવાથી મગજમાં હકારાત્મક બદલાવ આવે છે."
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            PsychoeducationData.prognosisSection.forEach { item ->
+                EducationalSectionAccordion(item = item, language = language)
+            }
+        }
+
+        // Section 8: Common Co-occurring Conditions (Comorbidity)
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.LocalHospital,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Common Co-occurring Patterns"
+                        Language.HINDI -> "साथ में होने वाली स्थितियाँ (सह-रुग्णता)"
+                        Language.GUJARATI -> "સાથે જોવા મળતી સ્થિતિઓ"
+                    },
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Text(
+                text = when (language) {
+                    Language.ENGLISH -> "Intense personality friction rarely exists in isolation. It commonly co-occurs with episodes of depression, anxiety, or trauma reactions, which can be treated directly."
+                    Language.HINDI -> "व्यक्तित्व की चुनौतियाँ अक्सर अकेले नहीं आतीं। इनके साथ अक्सर अवसाद (डिप्रेशन), घबराहट (चिंता) या तनाव के लक्षण भी जुड़े होते हैं, जिनका सीधे उपचार किया जा सकता है।"
+                    Language.GUJARATI -> "વ્યક્તિત્વની મુશ્કેલીઓ ભાગ્યે જ એકલી હોય છે. તેની સાથે ડિપ્રેશન, ચિંતા કે આઘાતની પ્રતિક્રિયાઓ પણ જોવા મળે છે, જેની સીધી સારવાર કરી શકાય છે."
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            PsychoeducationData.comorbiditySection.forEach { item ->
+                EducationalSectionAccordion(item = item, language = language)
+            }
+        }
+
+        // Section 9: Glossary of Key Terms
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.MenuBook,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = when (language) {
+                            Language.ENGLISH -> "Glossary of Key Terms"
+                            Language.HINDI -> "महत्वपूर्ण शब्दों की शब्दावली"
+                            Language.GUJARATI -> "મહત્વપૂર્ણ શબ્દોની પરિભાષા"
+                        },
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "Plain-language explanations of clinical terms used in modern psychiatric personality assessment."
+                        Language.HINDI -> "आधुनिक मनोरोग व्यक्तित्व मूल्यांकन में प्रयुक्त नैदानिक शब्दों की सरल व्याख्या।"
+                        Language.GUJARATI -> "આધુનિક માનસિક મૂલ્યાંકનમાં વપરાતા તબીબી શબ્દોની સરળ ભાષામાં સમજૂતી."
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                PsychoeducationData.glossaryItems.forEach { item ->
+                    GlossaryItemCard(item = item, language = language)
+                }
+            }
+        }
+
+        // Section 10: Frequently Asked Questions (FAQ)
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.HelpOutline,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = when (language) {
+                            Language.ENGLISH -> "Frequently Asked Questions"
+                            Language.HINDI -> "अक्सर पूछे जाने वाले सवाल"
+                            Language.GUJARATI -> "વારંવાર પૂછાતા પ્રશ્નો"
+                        },
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                PsychoeducationData.expandedFaqItems.forEach { faq ->
+                    FaqAccordionItem(item = faq, language = language)
+                }
+            }
+        }
+
+        // Section 11: Sources & Scientific References
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Book,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = when (language) {
+                            Language.ENGLISH -> "Sources & Clinical References"
+                            Language.HINDI -> "स्रोत एवं वैज्ञानिक संदर्भ"
+                            Language.GUJARATI -> "સંદર્ભો અને વૈજ્ઞાનિક માહિતી"
+                        },
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Text(
+                    text = when (language) {
+                        Language.ENGLISH -> "All educational content in this hub is synthesized from established international psychiatric and psychological frameworks:"
+                        Language.HINDI -> "इस हब की समस्त शैक्षिक सामग्री स्थापित अंतरराष्ट्रीय मनोरोग एवं मनोवैज्ञानिक दिशा-निर्देशों पर आधारित है:"
+                        Language.GUJARATI -> "આ હબની તમામ માહિતી આંતરરાષ્ટ્રીય માનસિક સ્વાસ્થ્ય માર્ગદર્શિકાઓ પર આધારિત છે:"
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                PsychoeducationData.sourcesAndReferences.forEach { sourcePair ->
+                    SourceReferenceCard(title = sourcePair.first, citation = sourcePair.second)
+                }
+            }
+        }
     }
 }
 
@@ -443,6 +693,241 @@ private fun DomainDetailAccordion(
                     Spacer(modifier = Modifier.height(4.dp))
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun EducationalSectionAccordion(
+    item: EducationalSectionItem,
+    language: Language
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(10.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded }
+                    .padding(14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = item.title.get(language),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = item.summary.get(language),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        lineHeight = 18.sp
+                    )
+                }
+                IconButton(onClick = { expanded = !expanded }) {
+                    Icon(
+                        imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                        contentDescription = if (expanded) "Show less" else "Show more",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            AnimatedVisibility(visible = expanded) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 14.dp, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+
+                    item.details.forEach { paragraph ->
+                        Text(
+                            text = paragraph.get(language),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            lineHeight = 22.sp
+                        )
+                    }
+
+                    Surface(
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp)) {
+                            Text(
+                                text = when (language) {
+                                    Language.ENGLISH -> "Key Takeaway:"
+                                    Language.HINDI -> "मुख्य निष्कर्ष:"
+                                    Language.GUJARATI -> "મુખ્ય તારણ:"
+                                },
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = item.takeaway.get(language),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                lineHeight = 18.sp
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(4.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun GlossaryItemCard(
+    item: GlossaryItem,
+    language: Language
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Text(
+                text = item.term.get(language),
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Text(
+                text = item.plainDefinition.get(language),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                lineHeight = 18.sp
+            )
+
+            Surface(
+                color = MaterialTheme.colorScheme.surface,
+                shape = RoundedCornerShape(6.dp),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+            ) {
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Text(
+                        text = "Why it matters: ",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                    Text(
+                        text = item.whyItMatters.get(language),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun FaqAccordionItem(
+    item: FAQItem,
+    language: Language
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded }
+                    .padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = item.question.get(language),
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Icon(
+                    imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            AnimatedVisibility(visible = expanded) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                ) {
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = item.answer.get(language),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        lineHeight = 20.sp
+                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SourceReferenceCard(
+    title: String,
+    citation: String
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Text(
+                text = citation,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                lineHeight = 18.sp
+            )
         }
     }
 }

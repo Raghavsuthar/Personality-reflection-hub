@@ -407,4 +407,541 @@ object PsychoeducationData {
             )
         )
     )
+
+    // --- Understanding the Causes (Etiology) ---
+    val causesSection: List<EducationalSectionItem> = listOf(
+        EducationalSectionItem(
+            title = LocalizedString("1. Innate Temperament & Biology", "1. जन्मजात स्वभाव और जैविक संवेदनशीलता", "1. જન્મજાત સ્વભાવ અને જૈવિક સંવેદનશીલતા"),
+            summary = LocalizedString(
+                "Babies are born with different biological nervous system sensitivity levels.",
+                "बच्चे तंत्रिका तंत्र की अलग-अलग जन्मजात संवेदनशीलता के साथ पैदा होते हैं।",
+                "બાળકો જન્મથી જ અલગ-અલગ જૈવિક સંવેદનશીલતા ધરાવતી નર્વસ સિસ્ટમ સાથે જન્મે છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Some individuals naturally inherit a nervous system that reacts faster, fires more intensely, and takes longer to return to baseline calm.",
+                    "कुछ लोगों को स्वाभाविक रूप से ऐसा तंत्रिका तंत्र मिलता है जो तेज़ी से सक्रिय होता है, अधिक तीव्रता से प्रतिक्रिया करता है और शांत होने में समय लेता है।",
+                    "કેટલાક લોકોને કુદરતી રીતે એવી નર્વસ સિસ્ટમ મળે છે જે ઝડપથી પ્રતિક્રિયા આપે છે અને શાંત થવામાં વધુ સમય લે છે."
+                ),
+                LocalizedString(
+                    "This high biological sensitivity is not a flaw or a choice; it is simply innate biological wiring, similar to being born with sensitive hearing or skin.",
+                    "यह संवेदनशीलता कोई दोष या पसंद नहीं है; यह जन्मजात बनावट है, ठीक वैसे ही जैसे किसी की सुनने या त्वचा की संवेदनशीलता अधिक होती है।",
+                    "આ ઉચ્ચ સંવેદનશીલતા કોઈ ખામી કે પસંદગી નથી; તે જન્મજાત કુદરતી રચના છે, જેમ કે કોઈની સાંભળવાની કે ચામડીની વધુ સંવેદનશીલતા."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Biology sets the initial emotional thermostat, but environment shapes how that thermostat is managed.",
+                "जीव विज्ञान भावनात्मक संवेदनशीलता तय करता है, लेकिन माहौल सिखाता है कि उसे कैसे संभालना है।",
+                "બાયોલોજી લાગણીશીલ સંવેદનશીલતા નક્કી કરે છે, પરંતુ આસપાસનું વાતાવરણ તેને સંભાળતા શીખવે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("2. Early Environment & Attachment", "2. प्रारंभिक परिवेश और भावनात्मक सुरक्षा", "2. પ્રારંભિક વાતાવરણ અને ભાવનાત્મક સુરક્ષા"),
+            summary = LocalizedString(
+                "How our early emotional expressions were responded to by caregivers.",
+                "बचपन में हमारी भावनाओं पर माता-पिता या संरक्षकों की क्या प्रतिक्रिया रही।",
+                "બાળપણમાં આપણી લાગણીઓ પર માતાપિતા કે સંભાળકર્તાઓની શું પ્રતિક્રિયા રહી."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "When a highly sensitive child grows up in an invalidating environment — where feelings are regularly dismissed as 'drama' or punished — the child learns that their internal experiences cannot be trusted.",
+                    "जब संवेदनशील बच्चा ऐसे माहौल में बड़ा होता है जहाँ उसकी भावनाओं को 'नाटक' कहकर नकारा या डांटा जाए, तो वह सीखता है कि अपनी भावनाओं पर भरोसा नहीं किया जा सकता।",
+                    "જ્યારે સંવેદનશીલ બાળક એવા વાતાવરણમાં મોટું થાય જ્યાં તેની લાગણીઓને 'નાટક' ગણીને નકારી દેવાય, ત્યારે તે પોતાની લાગણીઓ પર શંકા કરતા શીખે છે."
+                ),
+                LocalizedString(
+                    "This is not about blaming parents — parenting a temperamentally vulnerable child is intensely difficult. It reflects a mismatch between child sensitivity and environmental attunement.",
+                    "यह माता-पिता को दोष देने के लिए नहीं है; संवेदनशील बच्चे का पालन-पोषण बेहद चुनौतीपूर्ण होता है। यह बच्चे की ज़रूरत और माहौल के बीच असंतुलન दर्शाता है।",
+                    "આ માતાપિતાને દોષ દેવા માટે નથી; સંવેદનશીલ બાળકનો ઉછેર ખૂબ અઘરો હોય છે. આ બાળકની જરૂરિયાત અને વાતાવરણ વચ્ચેના અસંતુલનને દર્શાવે છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Safe, predictable validation helps sensitive nervous systems learn healthy self-soothing over time.",
+                "सुरक्षित और समझदारी भरा माहौल संवेदनशील तंत्रिका तंत्र को खुद को शांत करना सीखने में मदद करता है।",
+                "સુરક્ષિત અને સમજણભર્યું વાતાવરણ સંવેદનશીલ મગજને પોતાની જાતને શાંત રાખતા શીખવામાં મદદ કરે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("3. Life Experiences & Chronic Stress", "3. जीवन के अनुभव और गंभीर तनाव", "3. જીવનના અનુભવો અને ગંભીર તણાવ"),
+            summary = LocalizedString(
+                "Adversity, bullying, sudden loss, or trauma throughout adolescence and young adulthood.",
+                "किशोरावस्था या युवावस्था में लगातार तनाव, बदमाशी (bullying), अचानक नुकसान या मानसिक आघात।",
+                "કિશોરાવસ્થા કે યુવાવસ્થામાં સતત તણાવ, ગુંડાગીરી (બુલીઇંગ), સ્વજનની ખોટ કે માનસિક આઘાત."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Chronic relational stress or repeated betrayal forces the developing brain to adopt emergency defense strategies — such as hypervigilance, emotional shutdown, or intense control.",
+                    "लगातार तनाव या विश्वासघात बढ़ते हुए मस्तिष्क को सुरक्षा कवच अपनाने पर मजबूर करता है — जैसे अत्यधिक सतर्क रहना, पूरी तरह अलग-थलग होना, या हर चीज़ नियंत्रित करना।",
+                    "સતત તણાવ કે વિશ્વાસઘાત મગજને કટોકટીના સંરક્ષણાત્મક રસ્તા અપનાવવા મજબૂર કરે છે — જેમ કે અતિશય સાવધાન રહેવું, સાવ અળગા થઈ જવું, કે વધુ પડતું નિયંત્રણ રાખવું."
+                ),
+                LocalizedString(
+                    "These protective survival habits help someone endure painful environments, but become rigid and disruptive once the immediate threat is gone.",
+                    "ये आदतें कठिन समय में रक्षा करती हैं, लेकिन बाद में जब खतरा टल जाता है, तब भी यह कठोर व्यवहार सामान्य रिश्तों में अड़चन पैदा करता है।",
+                    "આ આદતો મુશ્કેલ સમયમાં રક્ષણ આપે છે, પરંતુ સંજોગો બદલાયા પછી પણ સામાન્ય સંબંધોમાં મુશ્કેલી ઊભી કરે છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Rigid personality patterns often begin as understandable survival adaptations to difficult circumstances.",
+                "कठोर व्यक्तित्व पैटर्न अक्सर कठिन परिस्थितियों में खुद को बचाने के लिए शुरू की गई सुरक्षा प्रणालियाँ होती हैं।",
+                "જક્કી વ્યક્તિત્વના વલણો મોટાભાગે મુશ્કેલ પરિસ્થિતિઓમાં જાતને બચાવવા માટે શરૂ થયેલા રક્ષણાત્મક ઉપાયો હોય છે."
+            )
+        )
+    )
+
+    // --- Does It Get Better? Prognosis and Hope ---
+    val prognosisSection: List<EducationalSectionItem> = listOf(
+        EducationalSectionItem(
+            title = LocalizedString("Natural Softening Over Adulthood", "उम्र के साथ स्वाभाविक स्थिरता", "ઉંમર સાથે કુદરતી સ્થિરતા"),
+            summary = LocalizedString(
+                "Long-term psychiatric studies confirm that personality traits naturally mellow over time.",
+                "दीर्घकालिक चिकित्सा शोध पुष्टि करते हैं कि व्यक्तित्व की तीव्रता समय के साथ स्वाभाविक रूप से कम होती है।",
+                "લાંબા ગાળાના તબીબી સંશોધનો પુષ્ટિ કરે છે કે વ્યક્તિત્વની તીવ્રતા ઉંમર સાથે કુદરતી રીતે હળવી બને છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Longitudinal follow-up studies spanning 10 to 25 years reveal that intense emotional turbulence and impulsive behaviors reach their peak in late teens/twenties and soften substantially in subsequent decades.",
+                    "10 से 25 वर्षों के शोध दर्शाते हैं कि तीव्र भावनात्मक तूफ़ान और अनियंत्रित आवेग बीस के दशक में चरम पर होते हैं और आगे चलकर धीरे-धीरे शांत होने लगते हैं।",
+                    "10 થી 25 વર્ષના સંશોધનો દર્શાવે છે કે તીવ્ર લાગણીશીલ તોફાન અને આવેગશીલતા વીસીના દાયકામાં ટોચ પર હોય છે અને સમય સાથે ધીમે ધીમે શાંત થાય છે."
+                ),
+                LocalizedString(
+                    "As people accumulate life experience and establish predictable routines, biological reactivity naturally stabilizes.",
+                    "जैसे-जैसे जीवन का अनुभव बढ़ता है और दिनचर्या व्यवस्थित होती है, जैविक संवेदनशीलता स्वाभाविक रूप से स्थिर होने लगती है।",
+                    "જેમ જેમ જીવનનો અનુભવ વધે છે અને દિનચર્યા વ્યવસ્થિત બને છે, તેમ જૈવિક સંવેદનશીલતા કુદરતી રીતે સ્થિર થવા લાગે છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "You are not trapped in today's emotional intensity forever; time and maturity work in your favor.",
+                "आप आज की भावनात्मक तीव्रता में हमेशा के लिए फंसे नहीं हैं; समय और अनुभव आपके पक्ष में काम करते हैं।",
+                "તમે આજની લાગણીશીલ તીવ્રતામાં કાયમ માટે અટવાયેલા નથી; સમય અને પરિપક્વતા તમારા પક્ષમાં કામ કરે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("Neuroplasticity & Active Skill Learning", "मस्तिष्क का लचीलापन और नए कौशल", "મગજની લવચીકતા અને નવા કૌશલ્યો"),
+            summary = LocalizedString(
+                "The adult brain can rewire neural circuits through repeated practice of emotional regulation.",
+                "वयस्क मस्तिष्क भी लगातार अभ्यास से नई आदतें और भावनात्मक संतुलन की प्रक्रियाएं सीख सकता है।",
+                "પુખ્ત મગજ પણ સતત અભ્યાસ દ્વારા નવી આદતો અને લાગણીશીલ સંતુલન શીખી શકે છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Evidence-based treatments like Dialectical Behavior Therapy (DBT) and Schema Therapy do not try to 'cure' personality; they train concrete skills for tolerating distress and checking automatic thoughts.",
+                    "डीबीटी (DBT) और स्कीमा थेरेपी जैसे वैज्ञानिक उपचार व्यक्तित्व को 'मिटाने' की कोशिश नहीं करते; वे संकट सहन करने और विचारों को संतुलित करने के व्यावहारिक कौशल सिखाते हैं।",
+                    "DBT અને સ્કીમા થેરાપી જેવા વૈજ્ઞાનિક ઉપચારો વ્યક્તિત્વને 'બદલી' નાખવાનો પ્રયાસ નથી કરતા; તેઓ તણાવ સહન કરવાના અને વિચારોને સંતુલિત કરવાના વ્યવહારુ કૌશલ્યો શીખવે છે."
+                ),
+                LocalizedString(
+                    "With consistent practice, the brain builds stronger inhibitory neural pathways from the prefrontal cortex to the amygdala, making self-calming easier and more automatic.",
+                    "लगातार अभ्यास से मस्तिष्क का तार्किक हिस्सा (Prefrontal Cortex) भावनात्मक हिस्से (Amygdala) को शांत करने में अधिक सक्षम बन जाता है।",
+                    "નિયમિત અભ્યાસથી મગજનો વિચારશીલ ભાગ લાગણીશીલ ભાગને શાંત કરવામાં વધુ સક્ષમ બને છે, જેથી જાતને શાંત કરવી સરળ બને છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Emotional stability is a learned skill set, not an unchangeable character fate.",
+                "भावनात्मक स्थिरता एक सीखा जा सकने वाला कौशल है, कोई अटल भाग्य नहीं।",
+                "લાગણીશીલ સ્થિરતા એ શીખી શકાય તેવું કૌશલ્ય છે, કોઈ ન બદલાય તેવું નસીબ નથી."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("What Realistic Recovery Looks Like", "वास्तविक सुधार का सही अर्थ", "વાસ્તવિક સુધારાનો સાચો અર્થ"),
+            summary = LocalizedString(
+                "Recovery does not mean becoming emotionless; it means regaining control over your life.",
+                "सुधार का मतलब भावनाहीन होना नहीं, बल्कि अपने जीवन और प्राथमिकताओं पर दोबारा नियंत्रण पाना है।",
+                "સુધારાનો અર્થ લાગણી વગરના થવું નથી, પરંતુ તમારા જીવન અને નિર્ણયો પર ફરીથી નિયંત્રણ મેળવવું છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Clinical recovery means emotional storms become shorter, less destructive, and occur less frequently. You recover your center in minutes or hours instead of days.",
+                    "सच्चे सुधार का अर्थ है कि भावनात्मक तूफ़ान छोटे, कम नुकसानदेह और कम बार होते हैं। आप दिनों के बजाय कुछ घंटों या मिनटों में संभल जाते हैं।",
+                    "સાચા સુધારાનો અર્થ એ છે કે લાગણીશીલ તોફાનો ટૂંકા, ઓછા નુકસાનકારક અને ઓછી વાર બને છે. તમે દિવસોને બદલે કલાકો કે મિનિટોમાં સ્વસ્થ થઈ જાઓ છો."
+                ),
+                LocalizedString(
+                    "People with deep sensitivities often discover that their underlying traits — deep empathy, passion, perceptiveness, and meticulousness — become extraordinary strengths once managed.",
+                    "संवेदनशील लोग पाते हैं कि उनके मूल गुण — गहरी सहानुभूति, निष्ठा, संवेदनशीलता और बारीकी पर ध्यान — संतुलन सीखने के बाद उनकी सबसे बड़ी ताकत बन जाते हैं।",
+                    "સંવેદનશીલ લોકો અનુભવે છે કે તેમના મૂળ ગુણો — ઊંડી સહાનુભૂતિ, ઉત્સાહ અને ઝીણવટભરી દ્રષ્ટિ — સંતુલન શીખ્યા પછી તેમની સૌથી મોટી શક્તિ બની જાય છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "A deeply meaningful, stable life with rich connections is entirely achievable.",
+                "गहरे रिश्तों और संतुष्टि से भरा एक स्थिर, अर्थपूर्ण जीवन पूरी तरह संभव है।",
+                "ઊંડા સંબંધો અને સંતોષથી ભરેલું સ્થિર, અર્થપૂર્ણ જીવન સંપૂર્ણપણે શક્ય છે."
+            )
+        )
+    )
+
+    // --- What Else Often Comes Along With This (Comorbidity) ---
+    val comorbiditySection: List<EducationalSectionItem> = listOf(
+        EducationalSectionItem(
+            title = LocalizedString("Depression & Mood Episodes", "अवसाद (Depression) और मूड विकार", "ડિપ્રેશન અને મૂડની સમસ્યાઓ"),
+            summary = LocalizedString(
+                "Chronic emotional struggle frequently triggers secondary episodes of low mood.",
+                "लगातार भावनात्मक तनाव अक्सर उदासी और हताशा के गंभीर दौर को जन्म देता है।",
+                "સતત લાગણીશીલ ખેંચતાણ ઘણીવાર ઊંડી ઉદાસી અને હતાશાના તબક્કા ઊભા કરે છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "When daily relationships feel painful or exhaustion sets in from hypervigilance, the brain's reward centers tire, leading to loss of interest, fatigue, and hopelessness.",
+                    "जब रिश्ते बोझिल लगने लगते हैं या लगातार सतर्क रहने से मानसिक थकावट आती है, तो मस्तिष्क में रुचि की कमी, निराशा और गहरी उदासी छा जाती है।",
+                    "જ્યારે સંબંધો બોજારૂપ લાગે કે સતત સાવચેત રહેવાથી થાક લાગે, ત્યારે મગજમાં રસ ઓછો થવો, નિરાશા અને ઊંડી ઉદાસી ઘર કરી જાય છે."
+                ),
+                LocalizedString(
+                    "Treating the depressive episode through medical care or therapy often provides the mental breathing room needed to work on underlying personality patterns.",
+                    "दवा या परामर्श से अवसाद को नियंत्रित करने से वह मानसिक राहत मिलती है जो व्यक्तित्व की आदतों पर काम करने के लिए ज़रूरी है।",
+                    "દવા કે કાઉન્સેલિંગ દ્વારા ડિપ્રેશનને નિયંત્રિત કરવાથી તે માનસિક શાંતિ મળે છે જે વ્યક્તિત્વના વલણો પર કામ કરવા જરૂરી છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Depression is often the visible symptom that brings people to seek help for deeper vulnerabilities.",
+                "अवसाद अक्सर वह संकेत होता है जो लोगों को अपनी गहरी समस्याओं के लिए सहायता लेने की प्रेरणा देता है।",
+                "ડિપ્રેશન ઘણીવાર એ પહેલો સંકેત હોય છે જે લોકોને પોતાની ઊંડી સમસ્યાઓ માટે મદદ લેવા પ્રેરિત કરે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("Anxiety & Panic Disorders", "चिंता (Anxiety) और घबराहट", "ચિંતા (Anxiety) અને ગભરાટ"),
+            summary = LocalizedString(
+                "An over-reactive threat system generates frequent physical panic and racing worry.",
+                "अति-संवेदनशील सुरक्षा प्रणाली बार-बार शारीरिक घबराहट और तेज चिंता पैदा करती है।",
+                "અતિ-સંવેદનશીલ ચેતાતંત્ર વારંવાર શારીરિક ગભરાટ અને તીવ્ર ચિંતા પેદા કરે છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Social anxiety, fear of abandonment, and panic attacks frequently co-occur with Negative Affectivity and Borderline patterns.",
+                    "सामाजिक चिंता, अकेले छूट जाने का खौफ और पैनिक अटैक अक्सर भावनात्मक अस्थिरता के साथ जुड़े होते हैं।",
+                    "સામાજિક ચિંતા, એકલા પડી જવાનો ભય અને ગભરાટના હુમલા (પેનિક એટેક) ઘણીવાર લાગણીશીલ અસ્થિરતા સાથે સંકળાયેલા હોય છે."
+                ),
+                LocalizedString(
+                    "Somatic anxiety symptoms (rapid heartbeat, knot in the stomach, shortness of breath) reflect nervous system mobilization rather than genuine external danger.",
+                    "शारीरिक लक्षण (तेज़ धड़कन, पेट में मरोड़, सांस फूलना) तंत्रिका तंत्र की तात्कालिक हलचल दर्शाते हैं, कोई वास्तविक खतरा नहीं।",
+                    "શારીરિક લક્ષણો (ધબકારા વધવા, પેટમાં ગભરાટ, શ્વાસ ચઢવો) નર્વસ સિસ્ટમની તત્કાલ પ્રતિક્રિયા દર્શાવે છે, કોઈ વાસ્તવિક જોખમ નથી."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Calming physical physiology through paced breathing and grounding creates safety for psychological healing.",
+                "धीमी सांस और शरीर को स्थिर करने के व्यायाम मानसिक शांति के लिए सुरक्षित आधार तैयार करते हैं।",
+                "ધીમા શ્વાસ અને માઇન્ડફુલનેસ દ્વારા શરીરને શાંત કરવું માનસિક સ્વાસ્થ્ય માટે ઉત્તમ પાયો પૂરો પાડે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("Substance Use & Impulsive Coping", "नशा एवं अस्वस्थ आदतें", "નશો અને આવેગજન્ય આદતો"),
+            summary = LocalizedString(
+                "Using alcohol, nicotine, or impulsive behaviors as a temporary chemical escape from pain.",
+                "तीव्र भावनात्मक दर्द से बचने के लिए शराब, धूम्रपान या जोखिम भरे कार्यों का अस्थायी सहारा लेना।",
+                "તીવ્ર ભાવનાત્મક દર્દથી બચવા માટે દારૂ, ધૂમ્રપાન કે જોખમી પગલાંઓનો અસ્થાયી સહારો લેવો."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "When internal agony becomes unbearable and healthy self-soothing skills are missing, substances offer quick artificial relief. However, they ultimately amplify emotional dysregulation.",
+                    "जब आंतरिक बेचैनी असहनीय हो जाती है और खुद को शांत करने के तरीके नहीं होते, तो नशा तुरंत राहत देता है। लेकिन आगे चलकर यह भावनात्मक अस्थिरता को कई गुना बढ़ा देता है।",
+                    "જ્યારે અંદરની બેચેની અસહ્ય બને અને શાંત થવાના રસ્તા ન હોય, ત્યારે નશો તત્કાલ રાહત આપે છે. પરંતુ આગળ જતાં તે માનસિક અસ્થિરતાને ઘણી વધારી દે છે."
+                ),
+                LocalizedString(
+                    "Addressing emotional dysregulation directly reduces the overwhelming urge to rely on numbing substances or destructive self-harm.",
+                    "भावनात्मक संतुलन के सीधे उपाय सीखने से नशे या खुद को नुकसान पहुँचाने की तीव्र इच्छा स्वाभाविक रूप से कम हो जाती है।",
+                    "લાગણીઓને સંતુલિત કરતા શીખવાથી નશો કરવા કે જાતને નુકસાન પહોંચાડવાની તીવ્ર ઈચ્છા આપોઆપ ઓછી થઈ જાય છે."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Impulsive coping is an attempt to solve intense suffering; replacing it with effective emotional tools brings lasting safety.",
+                "अस्वस्थ आदतें दर्द को दबाने का प्रयास होती हैं; उनके स्थान पर सही मानसिक कौशल सीखने से स्थायी सुरक्षा मिलती है।",
+                "આવેગજન્ય આદતો દર્દને દબાવવાનો પ્રયાસ છે; તેની જગ્યાએ સાચા માનસિક કૌશલ્યો શીખવાથી કાયમી રાહત મળે છે."
+            )
+        ),
+        EducationalSectionItem(
+            title = LocalizedString("Trauma & Complex PTSD", "मानसिक आघात (Trauma) और PTSD", "માનસિક આઘાત (Trauma) અને PTSD"),
+            summary = LocalizedString(
+                "Unresolved traumatic experiences continually trigger survival fight-or-flight responses.",
+                "अतीत के अनसुलझे आघात वर्तमान में भी लगातार खतरे और असुरक्षा का अहसास कराते रहते हैं।",
+                "ભૂતકાળના અણઉકેલાયેલા આઘાતો વર્તમાનમાં પણ સતત જોખમ અને અસુરક્ષાનો અહેસાસ કરાવ્યા કરે છે."
+            ),
+            details = listOf(
+                LocalizedString(
+                    "Many individuals with pronounced Borderline or Negative Affectivity patterns have histories of interpersonal neglect, trauma, or chaotic family environments.",
+                    "गंभीर भावनात्मक अस्थिरता वाले कई लोगों के इतिहास में पारिवारिक उपेक्षा, मानसिक आघात या अशांत माहौल रहा होता है।",
+                    "ગંભીર લાગણીશીલ અસ્થિરતા ધરાવતા ઘણા લોકોના ભૂતકાળમાં પારિવારિક ઉપેક્ષા, માનસિક આઘાત કે અશાંત વાતાવરણ રહેલું હોય છે."
+                ),
+                LocalizedString(
+                    "Trauma-informed psychotherapies help process past memories so the brain stops mistaking current neutral situations for past threats.",
+                    "ट्रॉमा-विशिष्ट थेरेपी पुरानी कड़वी यादों को सुलझाने में मदद करती है, जिससे दिमाग वर्तमान की सामान्य बातों को पुराना खतरा न समझे।",
+                    "ટ્રોમા-આધારિત થેરાપી જૂની પીડાદાયક યાદોને થાળે પાડવામાં મદદ કરે છે, જેથી મગજ વર્તમાનની સામાન્ય બાબતોને ભૂતકાળનું જોખમ ન માને."
+                )
+            ),
+            takeaway = LocalizedString(
+                "Healing trauma resolves the alarm system at its root, allowing genuine peace in relationships.",
+                "आघात से उबरना खतरे की झूठी घंटी को जड़ से शांत करता है और रिश्तों में वास्तविक सुकून लाता है।",
+                "આઘાતમાંથી મુક્તિ મેળવવી એ મગજની ખોટી ચેતવણીઓને મૂળમાંથી શાંત કરે છે અને સંબંધોમાં સાચો વિશ્વાસ લાવે છે."
+            )
+        )
+    )
+
+    // --- Glossary of Key Concepts (Alphabetical, Plain Language) ---
+    val glossaryItems: List<GlossaryItem> = listOf(
+        GlossaryItem(
+            term = LocalizedString("Anankastia", "अनंकास्टिया (Anankastia)", "અનંકાસ્ટિયા (Anankastia)"),
+            plainDefinition = LocalizedString(
+                "An intense focus on perfection, rigid rules, controlling details, and strict order.",
+                "पूर्णतावाद, सख्त नियमों, हर बारीकी को नियंत्रित करने और अटूट व्यवस्था पर अत्यधिक जोर।",
+                "સંપૂર્ણતાવાદ, કડક નિયમો, દરેક વિગતને નિયંત્રિત કરવા અને ચોક્કસ વ્યવસ્થા પર અતિશય આગ્રહ."
+            ),
+            whyItMatters = LocalizedString(
+                "Knowing this helps you notice when high standards switch from helpful excellence to exhausting rigidity.",
+                "यह समझने से पता चलता है कि कब उच्च मानक उपयोगी उत्कृष्टता से बदलकर थकाऊ कठोरता बन जाते हैं।",
+                "આ સમજવાથી ખ્યાલ આવે છે કે ક્યારે ઊંચા ધોરણો ઉપયોગી કાર્યક્ષમતામાંથી થકવી નાખતી જક્કી મનોવૃત્તિ બની જાય છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Borderline Pattern Specifier", "सीमावर्ती पैटर्न (Borderline Pattern)", "બોર્ડરલાઇન પેટર્ન (Borderline Pattern)"),
+            plainDefinition = LocalizedString(
+                "An ICD-11 qualifier describing rapid swings in mood, unstable self-image, and intense dread of abandonment.",
+                "ICD-11 की एक पहचान जिसमें मूड में तीव्र उतार-चढ़ाव, अस्थिर आत्म-छवि और अकेले छूट जाने का गहरा डर शामिल है।",
+                "ICD-11 નું એક લક્ષણ જેમાં મૂડમાં તીવ્ર ફેરફારો, અસ્થિર આત્મ-ઓળખ અને એકલા પડી જવાનો ઊંડો ડર સામેલ છે."
+            ),
+            whyItMatters = LocalizedString(
+                "Recognizing this pattern points toward highly effective targeted therapies like DBT.",
+                "इस पैटर्न को पहचानने से DBT जैसी अत्यधिक प्रभावी और केंद्रित थेरेपी की राह मिलती है।",
+                "આ પેટર્નને ઓળખવાથી DBT જેવી અત્યંત અસરકારક લક્ષિત સારવાર મેળવવામાં મદદ મળે છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Comorbidity", "सह-रुग्णता (Comorbidity)", "સહ-રોગાવસ્થા (Comorbidity)"),
+            plainDefinition = LocalizedString(
+                "The presence of two or more mental health conditions occurring together at the same time (e.g., anxiety alongside personality distress).",
+                "एक ही समय में दो या अधिक मानसिक स्वास्थ्य समस्याओं का एक साथ होना (जैसे व्यक्तित्व तनाव के साथ चिंता या अवसाद)।",
+                "એક જ સમયે બે કે તેથી વધુ માનસિક સ્વાસ્થ્ય સ્થિતિઓનું એકસાથે હોવું (જેમ કે વ્યક્તિત્વ તણાવ સાથે ચિંતા કે ડિપ્રેશન)."
+            ),
+            whyItMatters = LocalizedString(
+                "Treating co-occurring anxiety or depression makes it much easier to build healthy emotional regulation habits.",
+                "साथ में मौजूद चिंता या अवसाद का इलाज करने से व्यक्तित्व की आदतों को सुधारना बहुत आसान हो जाता है।",
+                "સાથે રહેલી ચિંતા કે ડિપ્રેશનનો ઇલાજ કરવાથી વ્યક્તિત્વની આદતો સુધારવી ઘણી સરળ બને છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Detachment", "अलगाव (Detachment)", "અળગાપણું (Detachment)"),
+            plainDefinition = LocalizedString(
+                "A tendency to keep emotional distance from others and withdraw from social closeness.",
+                "दूसरों से भावनात्मक दूरी बनाए रखने और सामाजिक मेलजोल से खुद को अलग रखने की प्रवृत्ति।",
+                "અન્ય લોકોથી ભાવનાત્મક અંતર રાખવા અને સામાજિક નિકટતાથી દૂર રહેવાનું વલણ."
+            ),
+            whyItMatters = LocalizedString(
+                "Helps families realize that solitude is often a self-protection shield rather than cold rejection.",
+                "परिवारों को यह समझने में मदद मिलती है कि अकेलापन अक्सर खुद को बचाने की ढाल है, कोई नाराजगी नहीं।",
+                "પરિવારોને સમજાય છે કે એકાંત એ મોટાભાગે રક્ષણાત્મક ઢાલ છે, કોઈ નારાજગી કે તિરસ્કાર નથી."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Dialectical Behavior Therapy (DBT)", "द्वंद્વાत्मक व्यवहार थेरेपी (DBT)", "ડાયલેક્ટિકલ બિહેવિયર થેરાપી (DBT)"),
+            plainDefinition = LocalizedString(
+                "A specialized psychotherapy that teaches mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness.",
+                "एक विशेष मनोवैज्ञानिक चिकित्सा जो माइंडफुलनेस, संकट सहन करने, भावनाएं संभालने और बेहतर बातचीत के कौशल सिखाती है।",
+                "એક ખાસ મનોવૈજ્ઞાનિક સારવાર જે માઇન્ડફુલનેસ, તણાવ સહન કરવાની ક્ષમતા, લાગણી નિયંત્રણ અને સંવાદ કૌશલ્યો શીખવે છે."
+            ),
+            whyItMatters = LocalizedString(
+                "It is the gold-standard, scientifically proven treatment for intense emotional volatility and Borderline patterns.",
+                "यह तीव्र भावनात्मक तूफानों और बॉर्डरलाइन पैटर्न के लिए सबसे प्रामाणिक एवं वैज्ञानिक उपचार पद्धति है।",
+                "તીવ્ર લાગણીશીલ તોફાનો અને બોર્ડરલાઇન પેટર્ન માટે આ સૌથી શ્રેષ્ઠ અને વૈજ્ઞાનિક રીતે સાબિત થયેલ સારવાર છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Dimensional Model", "आयामी मॉडल (Dimensional Model)", "આયામી મોડેલ (Dimensional Model)"),
+            plainDefinition = LocalizedString(
+                "A scientific view of personality as continuous spectra (like height or blood pressure) rather than rigid all-or-nothing disorder boxes.",
+                "व्यक्तित्व को एक पैमाने (जैसे ऊंचाई या रक्तचाप) के रूप में देखने का वैज्ञानिक तरीका, न कि किसी कठोर बीमारी के डिब्बे के रूप में।",
+                "વ્યક્તિત્વને એક માપદંડ (જેમ કે ઊંચાઈ કે બ્લડ પ્રેશર) તરીકે જોવાની વૈજ્ઞાનિક રીત, કોઈ જક્કી બીમારીના ખાનામાં પૂરવાને બદલે."
+            ),
+            whyItMatters = LocalizedString(
+                "Removes shame and stigma by recognizing that everyone has these traits to varying degrees.",
+                "यह शर्म और कलंक को मिटाता है क्योंकि यह मानता है कि ये सभी गुण हर इंसान में कम या ज्यादा मात्रा में होते हैं।",
+                "આ શરમ અને સામાજિક કલંક દૂર કરે છે કારણ કે આ વલણ દરેક વ્યક્તિમાં વધતા-ઓછા પ્રમાણમાં હોય છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Disinhibition", "असंयम / अनियंत्रण (Disinhibition)", "અસંયમ / આવેગશીલતા (Disinhibition)"),
+            plainDefinition = LocalizedString(
+                "Acting rapidly on sudden urges without thinking through future consequences or delaying gratification.",
+                "भविष्य के परिणामों की परवाह किए बिना तात्कालिक इच्छाओं पर तुरंत कदम उठाना और सब्र न रख पाना।",
+                "ભવિષ્યના પરિણામોનો વિચાર કર્યા વગર તત્કાલ ઇચ્છાઓ પર વર્તવું અને ધીરજ ન રાખી શકવી."
+            ),
+            whyItMatters = LocalizedString(
+                "Understanding this trait allows individuals to create environment safeguards (like spending limits) to protect themselves.",
+                "इसे समझने से लोग अपने इर्द-गिर्द ऐसी व्यवस्थाएँ बना सकते हैं जो उन्हें जल्दबाजी के नुकसान से बचाएँ।",
+                "આને સમજવાથી લોકો પોતાની આસપાસ એવી વ્યવસ્થાઓ ગોઠવી શકે છે જે તેમને ઉતાવળિયા નુકસાનથી બચાવે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Dissociality", "असामाजिक प्रवृत्तियाँ (Dissociality)", "અસામાજિક વલણ (Dissociality)"),
+            plainDefinition = LocalizedString(
+                "A disregard for the feelings, rights, and boundaries of others, often resulting in conflict or manipulative interactions.",
+                "दूसरों की भावनाओं, अधिकारों और सीमाओं की अनदेखी, जिससे अक्सर रिश्तों में टकराव या जोड़-तोड़ पैदा होती है।",
+                "અન્ય લોકોની લાગણીઓ, હક્કો અને મર્યાદાઓની ઉપેક્ષા, જેનાથી સંબંધોમાં ઘર્ષણ કે સ્વાર્થ સાધવાની વૃત્તિ જન્મે છે."
+            ),
+            whyItMatters = LocalizedString(
+                "Helps establish firm, calm boundaries so relationships stay safe and mutually respectful.",
+                "स्पष्ट और शांत सीमाएँ तय करने में मदद मिलती है ताकि रिश्ते सुरक्षित और सम्मानजनक बने रहें।",
+                "સ્પષ્ટ અને શાંત મર્યાદાઓ નક્કી કરવામાં મદદ મળે છે જેથી સંબંધો સુરક્ષિત અને પરસ્પર સન્માનજનક રહે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Emotional Dysregulation", "भावनात्मक असंतुलन (Emotional Dysregulation)", "ભાવનાત્મક અસંતુલન (Emotional Dysregulation)"),
+            plainDefinition = LocalizedString(
+                "Difficulty in soothing or modulating one's emotional state once it is triggered into high distress.",
+                "तीव्र गुस्सा, डर या दुख पैदा होने के बाद अपनी मानसिक स्थिति को शांत या नियंत्रित करने में भारी कठिनाई।",
+                "તીવ્ર ગુસ્સો, ડર કે ઉદાસી ઊભી થયા પછી પોતાની માનસિક સ્થિતિને શાંત કે સંતુલિત કરવામાં ભારે મુશ્કેલી."
+            ),
+            whyItMatters = LocalizedString(
+                "Clarifies that outbursts are not voluntary misbehavior, but a temporary breakdown in self-soothing ability.",
+                "यह स्पष्ट करता है कि गुस्सा कोई जानबूझकर किया गया नाटक नहीं, बल्कि खुद को शांत करने की क्षमता का अस्थायी अभाव है।",
+                "આ સ્પષ્ટ કરે છે કે આવેશ એ કોઈ જાણીજોઈને કરેલું ગેરવર્તન નથી, પણ જાતને શાંત કરવાની ક્ષમતાની અસ્થાયી કમી છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Expressed Emotion (EE)", "अभिव्यक्त भावना (Expressed Emotion)", "અભિવ્યક્ત લાગણી (Expressed Emotion)"),
+            plainDefinition = LocalizedString(
+                "A family communication climate characterized by frequent criticism, hostility, or emotional over-involvement.",
+                "पारिवारिक बातचीत का ऐसा माहौल जिसमें बार-बार आलोचना, गुस्सा या अत्यधिक दखलअंदाज़ी शामिल हो।",
+                "પારિવારિક વાતચીતનું એવું વાતાવરણ જેમાં વારંવાર ટીકા, ગુસ્સો કે વધુ પડતી દખલગીરી સામેલ હોય."
+            ),
+            whyItMatters = LocalizedString(
+                "Research proves that lowering Expressed Emotion at home dramatically reduces crises and prevents relapses.",
+                "शोध साबित करते हैं कि घर में आलोचना कम करने से तनाव घटता है और व्यक्ति जल्दी स्थिर होता है।",
+                "સંશોધન સાબિત કરે છે કે ઘરમાં ટીકા અને ગુસ્સો ઘટાડવાથી કટોકટી ઘટે છે અને સ્થિરતા જળવાય છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("ICD-11", "आईसीडी-11 (ICD-11)", "આઈસીડી-11 (ICD-11)"),
+            plainDefinition = LocalizedString(
+                "The World Health Organization's global clinical standard for classifying mental, behavioral, and neurodevelopmental conditions.",
+                "विश्व स्वास्थ्य संगठन (WHO) द्वारा मानसिक और शारीरिक स्वास्थ्य स्थितियों के वर्गीकरण का अंतरराष्ट्रीय मानक।",
+                "વિશ્વ સ્વાસ્થ્ય સંસ્થા (WHO) દ્વારા માનસિક અને શારીરિક સ્વાસ્થ્ય સ્થિતિઓના વર્ગીકરણનું વૈશ્વિક ધોરણ."
+            ),
+            whyItMatters = LocalizedString(
+                "It represents modern, stigma-reducing psychiatric medicine that replaced outdated 10-category personality labels.",
+                "यह आधुनिक चिकित्सा का प्रतीक है जिसने पुराने, अपमानजनक 10 लेबलों को हटाकर वैज्ञानिक पद्धति अपनाई।",
+                "આ આધુનિક તબીબી વિજ્ઞાનનું પ્રતીક છે જેણે જૂના, કલંકરૂપ લેબલોને બદલે વૈજ્ઞાનિક પદ્ધતિ અપનાવી છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Negative Affectivity", "ऋणात्मक भावुकता (Negative Affectivity)", "નકારાત્મક ભાવનાશીલતા (Negative Affectivity)"),
+            plainDefinition = LocalizedString(
+                "A biological tendency to frequently experience intense negative emotions like anxiety, anger, worry, and sadness.",
+                "चिंता, क्रोध, भय और उदासी जैसी तीव्र नकारात्मक भावनाओं को बार-बार और गहरे रूप में अनुभव करने की जैविक प्रवृत्ति।",
+                "ચિંતા, ક્રોધ, ડર અને ઉદાસી જેવી તીવ્ર લાગણીઓને વારંવાર અને ઊંડાણપૂર્વક અનુભવવાની જૈવિક વૃત્તિ."
+            ),
+            whyItMatters = LocalizedString(
+                "Helps a person understand their nervous system and seek proactive tools before distress peaks.",
+                "व्यक्ति को अपने तंत्रिका तंत्र को समझने और संकट गहराने से पहले सही कदम उठाने में मदद मिलती है।",
+                "વ્યક્તિને પોતાની નર્વસ સિસ્ટમ સમજવામાં અને સંકટ વધે તે પહેલાં યોગ્ય પગલાં ભરવામાં મદદ મળે છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Neuroplasticity", "मस्तिष्क का लचीलापन (Neuroplasticity)", "ન્યુરોપ્લાસ્ટીસિટી (Neuroplasticity)"),
+            plainDefinition = LocalizedString(
+                "The brain's lifelong ability to grow, adapt, and form new neural pathways through experience and practice.",
+                "अनुभव और निरंतर अभ्यास के माध्यम से जीवन भर नए न्यूरल रास्ते बनाने और बदलने की मस्तिष्क की जन्मजात क्षमता।",
+                "અનુભવ અને સતત અભ્યાસ દ્વારા જીવનભર નવા ચેતાતંતુકીય માર્ગો બનાવવાની અને બદલાવાની મગજની ક્ષમતા."
+            ),
+            whyItMatters = LocalizedString(
+                "Proves scientifically that personality habits can be modified with targeted skills at any age.",
+                "यह वैज्ञानिक रूप से साबित करता है कि किसी भी उम्र में सही अभ्यास से सोच और आदતો को बदला जा सकता है।",
+                "આ વૈજ્ઞાનિક રીતે સાબિત કરે છે કે કોઈપણ ઉંમરે યોગ્ય અભ્યાસથી વિચારસરણી અને ટેવો બદલી શકાય છે."
+            )
+        ),
+        GlossaryItem(
+            term = LocalizedString("Validation", "भावना की पुष्टि / स्वीकार्यता (Validation)", "લાગણીનો સ્વીકાર (Validation)"),
+            plainDefinition = LocalizedString(
+                "Communicating that someone's internal emotional experience makes sense and is understandable, even if you don't agree with their actions.",
+                "यह जताना कि दूसरे व्यक्ति का दर्द या भावना स्वाभाविक और समझने योग्य है, भले ही आप उसके व्यवहार से सहमत न हों।",
+                "સામેની વ્યક્તિની પીડા કે લાગણી સમજી શકાય તેવી છે તેવો સ્વીકાર કરવો, ભલે તમે તેના વર્તન સાથે સંમત ન હો."
+            ),
+            whyItMatters = LocalizedString(
+                "It is the single most powerful verbal de-escalation tool for calming emotional storms.",
+                "यह भावनात्मक तूफानों को तुरंत शांत करने का सबसे शक्तिशाली बातचीत का तरीका है।",
+                "લાગણીશીલ તોફાનોને તત્કાલ શાંત કરવા માટે આ વાતચીતનું સૌથી શક્તિશાળી સાધન છે."
+            )
+        )
+    )
+
+    // --- Expanded FAQ Items ---
+    val expandedFaqItems: List<FAQItem> = listOf(
+        FAQItem(
+            question = LocalizedString(
+                en = "What is the difference between everyday moodiness and a personality trait pattern?",
+                hi = "रोज़मर्रा के मूड में बदलाव और व्यक्तित्व पैटर्न में क्या अंतर है?",
+                gu = "રોજિંદા મૂડમાં ફેરફાર અને વ્યક્તિત્વની પેટર્નમાં શું તફાવત છે?"
+            ),
+            answer = LocalizedString(
+                en = "Everyone has bad days, shifts in mood, or moments of irritation when tired. A personality pattern is pervasive (shows up across work, family, and friendships) and persistent (lasts for years across adulthood rather than coming and going with daily events).",
+                hi = "हर किसी का मूड कभी-कभार खराब होता है या थकान में चिड़चिड़ाहट होती है। जबकि व्यक्तित्व पैटर्न व्यापक होता है (यह काम, घर और दोस्तों हर जगह दिखता है) और लंबे समय तक (वर्षों तक) लगातार बना रहता है।",
+                gu = "દરેક વ્યક્તિનો મૂડ ક્યારેક ખરાબ થાય છે અથવા થાકને લીધે ચીડ ચઢે છે. જ્યારે વ્યક્તિત્વની પેટર્ન વ્યાપક હોય છે (કામ, ઘર અને મિત્રો દરેક જગ્યાએ દેખાય છે) અને વર્ષો સુધી સતત જળવાઈ રહે છે."
+            )
+        ),
+        FAQItem(
+            question = LocalizedString(
+                en = "Can someone have traits from more than one domain?",
+                hi = "क्या किसी व्यक्ति में एक से अधिक क्षेत्रों के लक्षण हो सकते हैं?",
+                gu = "શું કોઈ વ્યક્તિમાં એક કરતાં વધુ ક્ષેત્રોના લક્ષણો હોઈ શકે છે?"
+            ),
+            answer = LocalizedString(
+                en = "Yes, absolutely. In fact, most people have a blend. For example, someone might experience high Negative Affectivity alongside Anankastia (perfectionism as a way to control anxiety), or Negative Affectivity paired with Disinhibition (impulsive reactions to distress).",
+                hi = "हाँ, बिल्कुल। वास्तव में, अधिकांश लोगों में इनका मिश्रण होता है। उदाहरण के लिए, किसी में चिंता (Negative Affectivity) के साथ पूर्णतावाद (Anankastia) हो सकता है, या भावनात्मक तनाव के समय अचानक जल्दबाजी करने की आदत (Disinhibition)।",
+                gu = "હા, ચોક્કસ. મોટાભાગના લોકોમાં આનું મિશ્રણ હોય છે. જેમ કે, કોઈમાં તીવ્ર લાગણીશીલતા સાથે સંપૂર્ણતાવાદ હોઈ શકે છે, અથવા લાગણીશીલ તણાવ વખતે આવેગમાં નિર્ણયો લેવાની આદત હોઈ શકે છે."
+            )
+        ),
+        FAQItem(
+            question = LocalizedString(
+                en = "Does reflecting high on a domain mean I have a personality disorder?",
+                hi = "क्या किसी क्षेत्र में उच्च स्कोर आने का मतलब है कि मुझे व्यक्तित्व विकार है?",
+                gu = "શું કોઈ ક્ષેત્રમાં વધુ સ્કોર આવવાનો અર્થ એ છે કે મને વ્યક્તિત્વ વિકાર છે?"
+            ),
+            answer = LocalizedString(
+                en = "No. A trait domain simply describes a tendency. Under ICD-11, a diagnosis is made only if these patterns cause chronic, significant impairment in self-functioning (identity, goals) or interpersonal relationships across multiple areas of life.",
+                hi = "नहीं। यह केवल आपकी एक प्रवृत्ति दर्शाता है। ICD-11 के तहत विकार का निर्णय तभी माना जाता है जब ये आदतें आपके दैनिक जीवन, काम या रिश्तों में गंभीर और निरंतर बाधा पैदा कर रही हों।",
+                gu = "ના. આ માત્ર તમારું એક વલણ દર્શાવે છે. ICD-11 મુજબ વિકાર ત્યારે જ ગણાય જ્યારે આ આદતો તમારા આત્મ-સન્માન, કામ કે અંગત સંબંધોમાં ગંભીર અને સતત મુશ્કેલી ઊભી કરતી હોય."
+            )
+        ),
+        FAQItem(
+            question = LocalizedString(
+                en = "Why does ICD-11 move away from labels like 'narcissist' or 'borderline' as primary boxes?",
+                hi = "ICD-11 पुराने लेबलों (जैसे 'नार्सिसिस्ट') को मुख्य श्रेणियों के रूप में क्यों नहीं इस्तेमाल करता?",
+                gu = "ICD-11 જૂના લેબલો (જેમ કે 'નાર્સિસિસ્ટ') ને મુખ્ય શ્રેણી તરીકે કેમ નથી વાપરતું?"
+            ),
+            answer = LocalizedString(
+                en = "Traditional labels created heavy stigma and rarely fit real patients, who often met criteria for 3 or 4 disorders simultaneously. Dimensional traits describe each human uniquely, reduce shame, and pinpoint exact therapeutic skills needed.",
+                hi = "पुराने लेबल लोगों पर कलंक लगाते थे और असल मरीजों पर सटीक नहीं बैठते थे, क्योंकि एक ही व्यक्ति कई श्रेणियों में फिट हो जाता था। आयामी मॉडल हर व्यक्ति को विशिष्ट रूप से समझता है और सीधे आवश्यक कौशल सिखाने पर ध्यान देता है।",
+                gu = "જૂના લેબલો સામાજિક કલંક ઊભું કરતા હતા અને દર્દીઓ પર બંધબેસતા નહોતા. આયામી મોડેલ દરેક વ્યક્તિને અનન્ય રીતે સમજે છે, શરમ દૂર કરે છે અને કયા ચોક્કસ કૌશલ્યો શીખવાની જરૂર છે તે સ્પષ્ટ કરે છે."
+            )
+        ),
+        FAQItem(
+            question = LocalizedString(
+                en = "Can medication change my personality?",
+                hi = "क्या दवाएं मेरे व्यक्तित्व को बदल सकती हैं?",
+                gu = "શું દવાઓ મારા વ્યક્તિત્વને બદલી શકે છે?"
+            ),
+            answer = LocalizedString(
+                en = "Medications do not alter core personality traits or teach communication skills. However, psychiatrists can prescribe medications to manage co-occurring conditions like depression, severe anxiety, or impulsive aggression so you have the clarity to engage in therapy.",
+                hi = "दवाएं आपके मूल व्यक्तित्व को नहीं बदलतीं और न ही रिश्ते संभालना सिखाती हैं। लेकिन वे साथ में मौजूद गंभीर अवसाद, घबराहट या अनियंत्रित गुस्से को शांत कर सकती हैं, जिससे थेरेपी में सीखना आसान हो जाता है।",
+                gu = "દવાઓ તમારા મૂળ વ્યક્તિત્વને બદલતી નથી કે વાતચીતના કૌશલ્યો શીખવતી નથી. પરંતુ તે ગંભીર ડિપ્રેશન, ચિંતા કે ગુસ્સાને શાંત કરી શકે છે, જેથી થેરાપી દ્વારા નવા કૌશલ્યો શીખવા સરળ બને."
+            )
+        )
+    )
+
+    // --- Sources & Further Reading ---
+    val sourcesAndReferences: List<Pair<String, String>> = listOf(
+        Pair(
+            "World Health Organization (WHO) ICD-11",
+            "Clinical Descriptions and Diagnostic Guidelines for Personality Disorder and Related Traits (Geneva, 2018/2022)."
+        ),
+        Pair(
+            "National Institute of Mental Health and Neurosciences (NIMHANS)",
+            "Clinical Practice Guidelines for the Assessment and Management of Personality Disorders (Bengaluru, India)."
+        ),
+        Pair(
+            "Linehan, Marsha M.",
+            "Cognitive-Behavioral Treatment of Borderline Personality Disorder & DBT Skills Training Manual (Guilford Press)."
+        ),
+        Pair(
+            "Tyrer, P., Mulder, R., et al.",
+            "The reclassification of personality disorders in ICD-11: test of fit in clinical practice. The Lancet Psychiatry."
+        ),
+        Pair(
+            "Leff, J., & Vaughn, C.",
+            "Expressed Emotion in Families: Its Significance for Mental Illness. Guilford Press."
+        )
+    )
 }
+
